@@ -35,6 +35,17 @@ public class TreeEncodedTest {
     }
 
     @Test
+    public void shouldCreateStrategyForNumber() {
+        TreeEncoded strategy = TreeEncoded.fromNumber(12, 4);  // 1100 = CCDD
+        Move[] encodedStrategy = strategy.getEncodedStrategy();
+        assertEquals("Should have returned defect for 0", Move.DEFECT, encodedStrategy[0]);
+        assertEquals("Should have returned defect for 1", Move.DEFECT, encodedStrategy[1]);
+        assertEquals("Should have returned cooperate for 2", Move.COOPERATE, encodedStrategy[2]);
+        assertEquals("Should have returned cooperate for 3", Move.COOPERATE, encodedStrategy[3]);
+    }
+
+
+    @Test
     public void shouldDetermineRightAnswerForCCCC() {
         TreeEncoded strategy = new TreeEncoded("DDDDDDDDDDDDDDDC");
         strategy.newMatch();

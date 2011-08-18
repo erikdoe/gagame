@@ -4,6 +4,6 @@ import com.mullekybernetik.gagame.match.Strategy;
 
 public interface Tournament {
 
-    public ScoreTable runTournament(Strategy[] participants, int runs);
+    public ScoreTable runTournament(Strategy[] strategies);
 
 }

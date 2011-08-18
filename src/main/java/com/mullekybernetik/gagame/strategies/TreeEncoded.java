@@ -32,6 +32,16 @@ public class TreeEncoded extends StrategyBase implements Strategy {
     *
     */
 
+    public static TreeEncoded fromNumber(int number, int bits) {
+        char[] encoding = new char[bits];
+        for (int i = 0; i < encoding.length; i++) {
+            encoding[i] = ((number & 1) == 1) ? 'C' : 'D';
+            number >>= 1;
+        }
+        return new TreeEncoded(new String(encoding));
+    }
+
+
     public TreeEncoded(String encoding) {
         depth = calcDepth(encoding.length());
         this.strategyString = encoding;

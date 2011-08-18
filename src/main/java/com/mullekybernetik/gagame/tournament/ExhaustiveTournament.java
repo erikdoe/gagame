@@ -13,22 +13,20 @@ public class ExhaustiveTournament implements Tournament {
         this.rounds = rounds;
     }
 
-    public ScoreTable runTournament(Strategy[] participants, int runs) {
-        return new ScoreTable(runTournamentInternal(participants, runs));
+    public ScoreTable runTournament(Strategy[] strategies) {
+        return new ScoreTable(runTournamentInternal(strategies));
     }
 
-    public Score[] runTournamentInternal(Strategy[] participants, int runs) {
-        Score[] scores = new Score[participants.length];
-        for (int i = 0; i < participants.length; i++)
-            scores[i] = new Score(participants[i]);
+    public Score[] runTournamentInternal(Strategy[] strategies) {
+        Score[] scores = new Score[strategies.length];
+        for (int i = 0; i < strategies.length; i++)
+            scores[i] = new Score(strategies[i]);
 
-        for (int r = 0; r < runs; r++) {
-            for (int i = 0; i < participants.length; i++) {
-                for (int j = i + 1; j < participants.length; j++) {
-                    int points[] = referee.runMatch(participants[i], participants[j], rounds);
-                    scores[i].addToPoints(points[0]);
-                    scores[j].addToPoints(points[1]);
-                }
+        for (int i = 0; i < strategies.length; i++) {
+            for (int j = i + 1; j < strategies.length; j++) {
+                int points[] = referee.runMatch(strategies[i], strategies[j], rounds);
+                scores[i].addToPoints(points[0]);
+                scores[j].addToPoints(points[1]);
             }
         }
         return scores;

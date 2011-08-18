@@ -59,37 +59,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MatchWatcherMain.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/MatchWatcherMain.java">
+      <file leaf-file-name="ExhaustiveMatchesTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/mullekybernetik/gagame/tournament/ExhaustiveMatchesTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="4" selection-start="334" selection-end="334" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NewMain.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/NewMain.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="4" selection-start="640" selection-end="640" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RandomCodedStrategyRunner.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/RandomCodedStrategyRunner.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="4" selection-start="555" selection-end="555" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TournamentMain.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/TournamentMain.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="64" selection-start="309" selection-end="309" vertical-scroll-proportion="0.15841584">
+            <state line="33" column="29" selection-start="1378" selection-end="1378" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -113,37 +86,46 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TitForTatTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/mullekybernetik/gagame/strategies/TitForTatTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="4" selection-start="183" selection-end="183" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TreeEncodedTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/mullekybernetik/gagame/strategies/TreeEncodedTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="13" selection-start="177" selection-end="177" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ExhaustiveMatchesTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/mullekybernetik/gagame/tournament/ExhaustiveMatchesTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="13" selection-start="438" selection-end="438" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ScoreTableTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/mullekybernetik/gagame/tournament/ScoreTableTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="16" column="4" selection-start="459" selection-end="459" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Referee.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/match/Referee.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="13" selection-start="56" selection-end="56" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Move.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/match/Move.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="19" selection-start="62" selection-end="62" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Strategy.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/match/Strategy.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="17" selection-start="60" selection-end="60" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NewMain.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/NewMain.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="15" selection-start="632" selection-end="632" vertical-scroll-proportion="0.077294685">
               <folding />
             </state>
           </provider>
@@ -163,22 +145,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/strategies/Cooperator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/strategies/Defector.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/strategies/RandomChoice.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/strategies/StrategyBase.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/strategies/TitForTat.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/strategies/TreeEncoded.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/tournament/ExhaustiveTournament.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/tournament/Score.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/tournament/ScoreTable.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/tournament/Tournament.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/NewMain.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/RandomCodedStrategyRunner.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/mullekybernetik/gagame/strategies/RandomChoiceTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/mullekybernetik/gagame/strategies/TitForTatTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/mullekybernetik/gagame/tournament/ScoreTableTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/TournamentMain.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/mullekybernetik/gagame/strategies/TreeEncodedTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/strategies/TreeEncoded.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/tournament/Tournament.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/tournament/ExhaustiveTournament.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/mullekybernetik/gagame/tournament/ExhaustiveMatchesTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/NewMain.java" />
       </list>
     </option>
   </component>
@@ -215,6 +197,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Favorites" />
       <pane id="Scope" />
       <pane id="ProjectPane">
@@ -351,14 +334,103 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GA-Game" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gagame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gagame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tournament" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GA-Game" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gagame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gagame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="strategies" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GA-Game" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gagame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gagame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="match" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="recentsLimit" value="5" />
@@ -370,72 +442,16 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.mullekybernetik.gagame.match" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TournamentMain">
-    <configuration default="false" name="ExhaustiveMatchesTest.shouldRunMatchesBetweenAllParticipantsWithRightNumberOfRounds" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" runner="emma">
-        <pattern>
-          <option name="PATTERN" value="com.mullekybernetik.gagame.tournament.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="gagame" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.mullekybernetik.gagame.tournament" />
-      <option name="MAIN_CLASS_NAME" value="com.mullekybernetik.gagame.tournament.ExhaustiveMatchesTest" />
-      <option name="METHOD_NAME" value="shouldRunMatchesBetweenAllParticipantsWithRightNumberOfRounds" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="RefereeTest" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" runner="emma">
-        <pattern>
-          <option name="PATTERN" value="com.mullekybernetik.gagame.match.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="gagame" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.mullekybernetik.gagame.match" />
-      <option name="MAIN_CLASS_NAME" value="com.mullekybernetik.gagame.match.RefereeTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Application.NewMain">
     <configuration default="false" name="MatchWatcherMain" type="Application" factoryName="Application" temporary="true">
       <extension name="coverage" enabled="false" merge="false" runner="emma">
         <pattern>
@@ -508,18 +524,55 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-        <option name="PhingTarget" enabled="false" />
-      </method>
+    <configuration default="false" name="NewMain" type="Application" factoryName="Application" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" runner="emma">
+        <pattern>
+          <option name="PATTERN" value="com.mullekybernetik.gagame.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="com.mullekybernetik.gagame.NewMain" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="GA-Game" />
+      <envs />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="TreeEncodedTest.shouldCreateStrategyForNumber" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" runner="emma">
+        <pattern>
+          <option name="PATTERN" value="com.mullekybernetik.gagame.strategies.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="GA-Game" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.mullekybernetik.gagame.strategies" />
+      <option name="MAIN_CLASS_NAME" value="com.mullekybernetik.gagame.strategies.TreeEncodedTest" />
+      <option name="METHOD_NAME" value="shouldCreateStrategyForNumber" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
     </configuration>
     <configuration default="true" type="Specs2RunConfiguration" factoryName="Specs2">
       <module name="" />
@@ -536,11 +589,15 @@
         <option name="PhingTarget" enabled="false" />
       </method>
     </configuration>
-    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" adl_options="" air_descriptor_path="" air_program_params="" air_publisher_id="" air_root_dir_path="" air_run_mode="AppDescriptor" browser_family="FIREFOX" class_name="" debugger_sdk="Module SDK" html_or_swf_file_path="" launcher_type="OSDefault" main_class_name="" method_name="" module_name="" output_log_level="" package_name="" player_path="/Applications/Flash Player Debugger.app" port="0" run_mode="HtmlOrSwfFile" run_trusted="false" scope="Class" socket_policy_port="0" url_to_launch="http://">
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
         <option name="Maven.BeforeRunTask" enabled="false" />
         <option name="PhingTarget" enabled="false" />
       </method>
@@ -554,6 +611,15 @@
       <setting name="workingDirectory" value="$PROJECT_DIR$" />
       <setting name="sysFilter" value=".*" />
       <setting name="exampleFilter" value=".*" />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+        <option name="PhingTarget" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" adl_options="" air_descriptor_path="" air_program_params="" air_publisher_id="" air_root_dir_path="" air_run_mode="AppDescriptor" browser_family="FIREFOX" class_name="" debugger_sdk="Module SDK" html_or_swf_file_path="" launcher_type="OSDefault" main_class_name="" method_name="" module_name="" output_log_level="" package_name="" player_path="/Applications/Flash Player Debugger.app" port="0" run_mode="HtmlOrSwfFile" run_trusted="false" scope="Class" socket_policy_port="0" url_to_launch="http://">
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
@@ -646,11 +712,11 @@
       </method>
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.ExhaustiveMatchesTest.shouldRunMatchesBetweenAllParticipantsWithRightNumberOfRounds" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.RefereeTest" />
-      <item index="2" class="java.lang.String" itemvalue="Application.MatchWatcherMain" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.com.mullekybernetik.gagame in GA-Game" />
-      <item index="4" class="java.lang.String" itemvalue="Application.TournamentMain" />
+      <item index="0" class="java.lang.String" itemvalue="Application.MatchWatcherMain" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.com.mullekybernetik.gagame in GA-Game" />
+      <item index="2" class="java.lang.String" itemvalue="Application.TournamentMain" />
+      <item index="3" class="java.lang.String" itemvalue="Application.NewMain" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.TreeEncodedTest.shouldCreateStrategyForNumber" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -686,12 +752,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1920" height="1174" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32991204" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -703,10 +768,11 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16408338" sideWeight="0.79205173" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20794824" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20897916" sideWeight="0.79205173" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20794824" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32991204" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="EJB" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -760,114 +826,90 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/strategies/TitForTat.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/tournament/Score.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="4" selection-start="216" selection-end="216" vertical-scroll-proportion="0.0">
+        <state line="5" column="4" selection-start="149" selection-end="149" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/MatchWatcherMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="4" selection-start="334" selection-end="334" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/mullekybernetik/gagame/strategies/TreeEncodedTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="37" selection-start="1493" selection-end="1493" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/strategies/TreeEncoded.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="4" selection-start="213" selection-end="213" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/tournament/ExhaustiveTournament.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="4" selection-start="206" selection-end="206" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/tournament/Score.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="4" selection-start="149" selection-end="149" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/tournament/ScoreTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="4" selection-start="100" selection-end="100" vertical-scroll-proportion="0.0">
+        <state line="52" column="0" selection-start="1983" selection-end="1983" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/tournament/Tournament.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="0" selection-start="203" selection-end="203" vertical-scroll-proportion="0.0">
+        <state line="6" column="57" selection-start="187" selection-end="187" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/MatchWatcherMain.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/tournament/ExhaustiveTournament.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="4" selection-start="334" selection-end="334" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/NewMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="4" selection-start="640" selection-end="640" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/RandomCodedStrategyRunner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="4" selection-start="555" selection-end="555" vertical-scroll-proportion="0.0">
+        <state line="30" column="0" selection-start="1068" selection-end="1068" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/mullekybernetik/gagame/match/RefereeTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="13" selection-start="325" selection-end="325" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="11" column="13" selection-start="325" selection-end="325" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/mullekybernetik/gagame/strategies/RandomChoiceTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="4" selection-start="230" selection-end="230" vertical-scroll-proportion="0.0">
+        <state line="10" column="4" selection-start="230" selection-end="230" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/mullekybernetik/gagame/tournament/ScoreTableTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="4" selection-start="459" selection-end="459" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/match/Move.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="19" selection-start="62" selection-end="62" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/mullekybernetik/gagame/strategies/TitForTatTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/match/Strategy.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="4" selection-start="183" selection-end="183" vertical-scroll-proportion="0.0">
+        <state line="2" column="17" selection-start="60" selection-end="60" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/mullekybernetik/gagame/strategies/TreeEncodedTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/match/Referee.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="13" selection-start="177" selection-end="177" vertical-scroll-proportion="0.0">
+        <state line="2" column="13" selection-start="56" selection-end="56" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/mullekybernetik/gagame/tournament/ExhaustiveMatchesTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="13" selection-start="438" selection-end="438" vertical-scroll-proportion="0.0">
+        <state line="33" column="29" selection-start="1378" selection-end="1378" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/mullekybernetik/gagame/tournament/ScoreTableTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/NewMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="4" selection-start="459" selection-end="459" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/mullekybernetik/gagame/TournamentMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="64" selection-start="309" selection-end="309" vertical-scroll-proportion="0.15841584">
+        <state line="15" column="15" selection-start="632" selection-end="632" vertical-scroll-proportion="0.077294685">
           <folding />
         </state>
       </provider>
@@ -930,7 +972,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>

@@ -222,14 +222,7 @@
   </component>
   <component name="libraryTable">
     <library name="lib">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/lib/cglib-nodep-2.1_3.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/jmock-core-1.2.0.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/junit-4.1.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/jmock-cglib-1.2.0.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/easymock.jar!/" />
-        <root url="jar://$PROJECT_DIR$/lib/easymockclassextension.jar!/" />
-      </CLASSES>
+      <CLASSES />
       <JAVADOC />
       <SOURCES />
     </library>
