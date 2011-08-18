@@ -31,9 +31,7 @@ public class Score implements Comparable<Score> {
     public int compareTo(Score other) {
         if (other.points != this.points)
             return this.points - other.points;
-        // I'm doing this so that TreeSet sees the objects as different. It can also
-        // be viewed as a randomiser for ties.
-        return this.hashCode() - other.hashCode();
+        return this.strategy.hashCode() - other.strategy.hashCode();
     }
 
     @Override

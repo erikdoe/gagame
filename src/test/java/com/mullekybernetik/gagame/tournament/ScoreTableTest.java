@@ -3,6 +3,7 @@ package com.mullekybernetik.gagame.tournament;
 import com.mullekybernetik.gagame.match.Strategy;
 import com.mullekybernetik.gagame.strategies.Cooperator;
 import com.mullekybernetik.gagame.strategies.Defector;
+import com.mullekybernetik.gagame.strategies.RandomChoice;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,17 +17,16 @@ import static org.junit.Assert.assertTrue;
 public class ScoreTableTest {
 
     private Strategy defector;
-    private Strategy cooperator1;
-    private Strategy cooperator2;
+    private Strategy cooperator;
+    private Strategy random;
     private ScoreTable table;
 
     @Before
     public void setUp() {
         defector = new Defector();
-        cooperator1 = new Cooperator();
-        cooperator2 = new Cooperator();
-        Score[] scores = new Score[]{new Score(cooperator1), new Score(defector), new Score(cooperator2)};
-        scores[1].addToPoints(5);
+        cooperator = new Cooperator();
+        random = new RandomChoice();
+        Score[] scores = new Score[]{new Score(cooperator, 4), new Score(defector, 5), new Score(random, 3)};
         table = new ScoreTable(scores);
     }
 
@@ -46,7 +46,7 @@ public class ScoreTableTest {
         assertEquals("Should return two winners", 2, result.size());
         List<Strategy> winners = getPlayers(result);
         assertTrue("Defector should be a winner", winners.contains(defector));
-        assertTrue("A cooperator should be a winner", winners.contains(cooperator1) || winners.contains(cooperator2));
+        assertTrue("A cooperator should be a winner", winners.contains(cooperator) || winners.contains(random));
     }
 
     private List<Strategy> getPlayers(Collection<Score> scores) {

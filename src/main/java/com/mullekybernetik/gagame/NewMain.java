@@ -21,31 +21,33 @@ public class NewMain {
     private static Random generator = new Random();
 
     public static void main(String[] args) {
-        HashMap<Strategy, Integer> wins = new HashMap<Strategy, Integer>();
 
-        for (int run = 0; run < 1000000; run++) {
+        while (true) {
+
+            Map<Strategy, Integer> wins = new HashMap<Strategy, Integer>();
             Strategy[] strategies = createStrategies();
 
-            Tournament tournament = new ExhaustiveTournament(new Referee(), ROUNDS_PER_MATCH);
-            ScoreTable result = tournament.runTournament(strategies);
-            Strategy winner = result.getTopScores(1).iterator().next().getStrategy();
+            for (int run = 0; run < 10; run++) {
+                Tournament tournament = new ExhaustiveTournament(new Referee(), ROUNDS_PER_MATCH);
+                ScoreTable result = tournament.runTournament(strategies);
 
-            Integer points = wins.get(winner);
-            points = (points == null) ? 1 : points + 1;
-            wins.put(winner, points);
-
-            if (run % 100 != 0)
-                continue;
+                Collection<Score> top10 = result.getTopScores(10);
+                for (Score s : top10) {
+                    Integer points = wins.get(s.getStrategy());
+                    points = ((points == null) ? 0 : points) + s.getPoints();
+                    wins.put(s.getStrategy(), points);
+                }
+            }
 
             Score[] scores = new Score[wins.size()];
             int i = 0;
             for (Strategy strategy : wins.keySet())
                 scores[i++] = new Score(strategy, wins.get(strategy));
-
             ScoreTable table = new ScoreTable(scores);
-            List<Score> topten = new ArrayList<Score>(table.getTopScores(20));
-            Collections.reverse(topten);
-            for (Score score : topten)
+
+            List<Score> seasonTop20 = new ArrayList<Score>(table.getTopScores(20));
+            Collections.reverse(seasonTop20);
+            for (Score score : seasonTop20)
                 System.out.format("%4d %-20s ", score.getPoints(), score.getStrategy().toString());
             System.out.println();
         }
