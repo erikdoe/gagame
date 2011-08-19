@@ -2,10 +2,7 @@ package com.mullekybernetik.gagame;
 
 import com.mullekybernetik.gagame.match.Referee;
 import com.mullekybernetik.gagame.match.Strategy;
-import com.mullekybernetik.gagame.strategies.Cooperator;
-import com.mullekybernetik.gagame.strategies.Defector;
-import com.mullekybernetik.gagame.strategies.TitForTat;
-import com.mullekybernetik.gagame.strategies.TreeEncoded;
+import com.mullekybernetik.gagame.strategies.*;
 import com.mullekybernetik.gagame.tournament.ExhaustiveTournament;
 import com.mullekybernetik.gagame.tournament.Score;
 import com.mullekybernetik.gagame.tournament.ScoreTable;
@@ -15,8 +12,9 @@ import java.util.*;
 
 public class NewMain {
 
-    private static int ROUNDS_PER_MATCH = 7;
-    private static int STRATEGY_SIZE = 8;
+    private static int ROUNDS_PER_MATCH = 6;
+    private static int STRATEGY_SIZE = 16;
+    private static int STRATEGY_COUNT = 100;
 
     private static Random generator = new Random();
 
@@ -25,9 +23,9 @@ public class NewMain {
         while (true) {
 
             Map<Strategy, Integer> wins = new HashMap<Strategy, Integer>();
-            Strategy[] strategies = createStrategies();
 
-            for (int run = 0; run < 10; run++) {
+            for (int run = 0; run < 50000; run++) {
+                Strategy[] strategies = createRandomStrategies(STRATEGY_COUNT);
                 Tournament tournament = new ExhaustiveTournament(new Referee(), ROUNDS_PER_MATCH);
                 ScoreTable result = tournament.runTournament(strategies);
 
@@ -53,19 +51,23 @@ public class NewMain {
         }
     }
 
-    private static Strategy[] createStrategies() {
-        Strategy[] players = new Strategy[3 + (1 << STRATEGY_SIZE)];
-        for (int i = 0; i < players.length; i++)
-            players[i] = getPlayerForNumber(i);
-        return players;
+    private static Strategy[] createAllStrategies() {
+        Strategy[] strategies = new Strategy[4 + (1 << STRATEGY_SIZE)];
+        for (int i = 0; i < strategies.length; i++)
+            strategies[i] = getStrategyForNumber(i);
+        return strategies;
     }
 
-    public static Strategy getRandomPlayer() {
-        int r = generator.nextInt(3 + 65536);
-        return getPlayerForNumber(r);
+    private static Strategy[] createRandomStrategies(int count) {
+        Strategy[] strategies = new Strategy[count];
+        for (int i = 0; i < strategies.length; i++) {
+            int r = generator.nextInt(4 + (1 << STRATEGY_SIZE));
+            strategies[i] = getStrategyForNumber(r);
+        }
+        return strategies;
     }
 
-    private static Strategy getPlayerForNumber(int r) {
+    private static Strategy getStrategyForNumber(int r) {
         switch (r) {
             case 0:
                 return new Defector();
@@ -73,8 +75,10 @@ public class NewMain {
                 return new Cooperator();
             case 2:
                 return new TitForTat();
+            case 3:
+                return new RandomChoice();
             default:
-                return TreeEncoded.fromNumber(r - 3, STRATEGY_SIZE);
+                return TreeEncoded.fromNumber(r - 4, STRATEGY_SIZE);
         }
     }
 
