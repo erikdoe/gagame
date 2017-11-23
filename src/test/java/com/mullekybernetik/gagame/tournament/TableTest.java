@@ -4,6 +4,7 @@ import com.mullekybernetik.gagame.match.Strategy;
 import com.mullekybernetik.gagame.strategies.Cooperator;
 import com.mullekybernetik.gagame.strategies.Defector;
 import com.mullekybernetik.gagame.strategies.RandomChoice;
+import com.mullekybernetik.gagame.strategies.TitForTat;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,45 +15,46 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class ScoreTableTest {
+public class TableTest {
 
     private Strategy defector;
     private Strategy cooperator;
     private Strategy random;
-    private ScoreTable table;
+    private Strategy titForTat;
+    private Table table;
 
     @Before
     public void setUp() {
         defector = new Defector();
         cooperator = new Cooperator();
         random = new RandomChoice();
-        Score[] scores = new Score[]{new Score(cooperator, 4), new Score(defector, 5), new Score(random, 3)};
-        table = new ScoreTable(scores);
+        titForTat = new TitForTat();
+        table = new Table(new Strategy[]{cooperator, defector, random, titForTat}, new int[]{2, 5, 4, 4});
     }
 
     @Test
-    public void shouldReturnTopScores() {
-        Collection<Score> result = table.getTopScores(1);
+    public void shouldReturnTopStrategies() {
+        Collection<TableEntry> result = table.getTopEntries(1);
 
         assertEquals("Should return only the winner", 1, result.size());
-        List<Strategy> winners = getPlayers(result);
+        List<Strategy> winners = getStrategies(result);
         assertTrue("Defector should be the winner", winners.contains(defector));
     }
 
     @Test
     public void shouldSelectBestTwoFromGroupWithAmbiguity() {
-        Collection<Score> result = table.getTopScores(2);
+        Collection<TableEntry> result = table.getTopEntries(2);
 
         assertEquals("Should return two winners", 2, result.size());
-        List<Strategy> winners = getPlayers(result);
+        List<Strategy> winners = getStrategies(result);
         assertTrue("Defector should be a winner", winners.contains(defector));
-        assertTrue("A cooperator should be a winner", winners.contains(cooperator) || winners.contains(random));
+        assertTrue("A non-defector should be a winner, too", winners.contains(titForTat) || winners.contains(random));
     }
 
-    private List<Strategy> getPlayers(Collection<Score> scores) {
+    private List<Strategy> getStrategies(Collection<TableEntry> entries) {
         ArrayList<Strategy> players = new ArrayList<Strategy>();
-        for (Score s : scores)
-            players.add(s.getStrategy());
+        for (TableEntry e : entries)
+            players.add(e.getStrategy());
         return players;
     }
 

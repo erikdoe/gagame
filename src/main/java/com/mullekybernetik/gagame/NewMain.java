@@ -1,67 +1,66 @@
 package com.mullekybernetik.gagame;
 
-import com.mullekybernetik.gagame.match.Referee;
+import com.mullekybernetik.gagame.match.MatchRunner;
 import com.mullekybernetik.gagame.match.Strategy;
 import com.mullekybernetik.gagame.strategies.*;
 import com.mullekybernetik.gagame.tournament.ExhaustiveTournament;
-import com.mullekybernetik.gagame.tournament.Score;
-import com.mullekybernetik.gagame.tournament.ScoreTable;
+import com.mullekybernetik.gagame.tournament.Table;
+import com.mullekybernetik.gagame.tournament.TableEntry;
 import com.mullekybernetik.gagame.tournament.Tournament;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class NewMain {
 
-    private static int ROUNDS_PER_MATCH = 6;
-    private static int STRATEGY_SIZE = 16;
-    private static int STRATEGY_COUNT = 100;
+    private static final int ROUNDS_PER_MATCH = 7;
+    private static final int STRATEGY_SIZE = 8;
 
-    private static Random generator = new Random();
+    private static Random random = new Random();
 
     public static void main(String[] args) {
 
         while (true) {
 
-            Map<Strategy, Integer> wins = new HashMap<Strategy, Integer>();
+            Map<Strategy, Integer> totalPoints = new HashMap<>();
 
-            for (int run = 0; run < 50000; run++) {
-                Strategy[] strategies = createRandomStrategies(STRATEGY_COUNT);
-                Tournament tournament = new ExhaustiveTournament(new Referee(), ROUNDS_PER_MATCH);
-                ScoreTable result = tournament.runTournament(strategies);
+            for (int run = 0; run < 10; run++) {
+                Strategy[] strategies = createAllStrategies();
+                Tournament tournament = new ExhaustiveTournament(new MatchRunner());
+                Table result = tournament.runTournament(strategies, ROUNDS_PER_MATCH);
 
-                Collection<Score> top10 = result.getTopScores(10);
-                for (Score s : top10) {
-                    Integer points = wins.get(s.getStrategy());
-                    points = ((points == null) ? 0 : points) + s.getPoints();
-                    wins.put(s.getStrategy(), points);
+                Collection<TableEntry> topEntries = result.getAllEntries();
+                for (TableEntry e : topEntries) {
+                    Integer count = totalPoints.get(e.getStrategy());
+                    count = ((count == null) ? 0 : count) + e.getPoints();
+                    totalPoints.put(e.getStrategy(), count);
                 }
             }
 
-            Score[] scores = new Score[wins.size()];
-            int i = 0;
-            for (Strategy strategy : wins.keySet())
-                scores[i++] = new Score(strategy, wins.get(strategy));
-            ScoreTable table = new ScoreTable(scores);
+            ArrayList<TableEntry> entries = new ArrayList<>();
+            for (Strategy strategy : totalPoints.keySet())
+                entries.add(new TableEntry(strategy, totalPoints.get(strategy)));
+            Table table = new Table(entries);
 
-            List<Score> seasonTop20 = new ArrayList<Score>(table.getTopScores(20));
+            List<TableEntry> seasonTop20 = new ArrayList<>(table.getTopEntries(20));
             Collections.reverse(seasonTop20);
-            for (Score score : seasonTop20)
-                System.out.format("%4d %-20s ", score.getPoints(), score.getStrategy().toString());
+            for (TableEntry entry : seasonTop20)
+                System.out.format("%-10s: %4d    ", entry.getStrategy().toString(), entry.getPoints());
             System.out.println();
         }
     }
 
     private static Strategy[] createAllStrategies() {
-        Strategy[] strategies = new Strategy[4 + (1 << STRATEGY_SIZE)];
+        Strategy[] strategies = new Strategy[(1 << STRATEGY_SIZE)];
         for (int i = 0; i < strategies.length; i++)
-            strategies[i] = getStrategyForNumber(i);
+            strategies[i] = getStrategyForNumber(i+4);
         return strategies;
     }
 
     private static Strategy[] createRandomStrategies(int count) {
         Strategy[] strategies = new Strategy[count];
         for (int i = 0; i < strategies.length; i++) {
-            int r = generator.nextInt(4 + (1 << STRATEGY_SIZE));
+            int r = random.nextInt(4 + (1 << STRATEGY_SIZE));
             strategies[i] = getStrategyForNumber(r);
         }
         return strategies;

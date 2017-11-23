@@ -1,35 +1,33 @@
 package com.mullekybernetik.gagame.tournament;
 
-import com.mullekybernetik.gagame.match.Referee;
+import com.mullekybernetik.gagame.match.MatchRunner;
+import com.mullekybernetik.gagame.match.Score;
 import com.mullekybernetik.gagame.match.Strategy;
 
 public class ExhaustiveTournament implements Tournament {
 
-    private Referee referee;
-    private int rounds;
+    private MatchRunner matchRunner;
 
-    public ExhaustiveTournament(Referee referee, int rounds) {
-        this.referee = referee;
-        this.rounds = rounds;
+    public ExhaustiveTournament(MatchRunner matchRunner) {
+        this.matchRunner = matchRunner;
     }
 
-    public ScoreTable runTournament(Strategy[] strategies) {
-        return new ScoreTable(runTournamentInternal(strategies));
+    public Table runTournament(Strategy[] strategies, int roundsPerMatch) {
+        int[] points = runTournamentInternal(strategies, roundsPerMatch);
+        return new Table(strategies, points);
     }
 
-    public Score[] runTournamentInternal(Strategy[] strategies) {
-        Score[] scores = new Score[strategies.length];
-        for (int i = 0; i < strategies.length; i++)
-            scores[i] = new Score(strategies[i]);
+    protected int[] runTournamentInternal(Strategy[] strategies, int roundsPerMatch) {
+        int[] totalPoints = new int[strategies.length];
 
         for (int i = 0; i < strategies.length; i++) {
             for (int j = i + 1; j < strategies.length; j++) {
-                int points[] = referee.runMatch(strategies[i], strategies[j], rounds);
-                scores[i].addToPoints(points[0]);
-                scores[j].addToPoints(points[1]);
+                Score score = matchRunner.runMatch(strategies[i], strategies[j], roundsPerMatch);
+                totalPoints[i] += score.a;
+                totalPoints[j] += score.b;
             }
         }
-        return scores;
+        return totalPoints;
     }
 
 }
