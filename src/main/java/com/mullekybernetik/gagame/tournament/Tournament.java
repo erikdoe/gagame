@@ -1,9 +1,11 @@
 package com.mullekybernetik.gagame.tournament;
 
-import com.mullekybernetik.gagame.match.Strategy;
+import com.mullekybernetik.gagame.strategies.Strategy;
+
+import java.util.List;
 
 public interface Tournament {
 
-    public Table runTournament(Strategy[] strategies, int roundsPerMatch);
+    public Table runTournament(List<Strategy> strategies, int roundsPerMatch);
 
 }

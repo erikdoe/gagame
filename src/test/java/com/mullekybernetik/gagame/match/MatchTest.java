@@ -2,6 +2,7 @@ package com.mullekybernetik.gagame.match;
 
 import com.mullekybernetik.gagame.strategies.Cooperator;
 import com.mullekybernetik.gagame.strategies.Defector;
+import com.mullekybernetik.gagame.strategies.Strategy;
 import org.junit.Assert;
 import org.junit.Test;
 

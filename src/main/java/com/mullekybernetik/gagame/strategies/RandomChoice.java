@@ -1,7 +1,6 @@
 package com.mullekybernetik.gagame.strategies;
 
 import com.mullekybernetik.gagame.match.Move;
-import com.mullekybernetik.gagame.match.Strategy;
 
 import java.util.Random;
 
@@ -17,6 +16,10 @@ public class RandomChoice extends StrategyBase implements Strategy {
     }
 
     public void setOpponentsMove(Move m) {
+    }
+
+    public Strategy clone() {
+        return this;
     }
 
     @Override

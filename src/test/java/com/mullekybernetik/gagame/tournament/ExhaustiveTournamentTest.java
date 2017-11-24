@@ -2,11 +2,13 @@ package com.mullekybernetik.gagame.tournament;
 
 import com.mullekybernetik.gagame.match.MatchRunner;
 import com.mullekybernetik.gagame.match.Score;
-import com.mullekybernetik.gagame.match.Strategy;
+import com.mullekybernetik.gagame.strategies.Strategy;
 import com.mullekybernetik.gagame.strategies.Cooperator;
 import com.mullekybernetik.gagame.strategies.Defector;
 import com.mullekybernetik.gagame.strategies.RandomChoice;
 import org.junit.Test;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
@@ -39,11 +41,11 @@ public class ExhaustiveTournamentTest {
         ExhaustiveTournament tournament = new ExhaustiveTournament(new MatchRunner());
         Strategy[] strategies = new Strategy[] { new Cooperator(), new Cooperator(), new Defector() };
 
-        int[] points = tournament.runTournamentInternal(strategies, 1);
+        AtomicInteger[] points = tournament.runTournamentInternal(strategies, 1);
 
-        assertEquals("Cooperator should have 2 points.", 2, points[0]);
-        assertEquals("Cooperator should have 2 points.", 2, points[1]);
-        assertEquals("Defector should have 6 points.", 6, points[2]);
+        assertEquals("Cooperator should have 2 points.", 2, points[0].get());
+        assertEquals("Cooperator should have 2 points.", 2, points[1].get());
+        assertEquals("Defector should have 6 points.", 6, points[2].get());
     }
 
 }

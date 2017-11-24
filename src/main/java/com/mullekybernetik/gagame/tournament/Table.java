@@ -1,8 +1,9 @@
 package com.mullekybernetik.gagame.tournament;
 
-import com.mullekybernetik.gagame.match.Strategy;
+import com.mullekybernetik.gagame.strategies.Strategy;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Table {
 
@@ -13,26 +14,33 @@ public class Table {
     }
 
     public Table(Strategy[] strategies, int[] points) {
-        entries = new ArrayList<TableEntry>(strategies.length);
+        entries = new ArrayList<>(strategies.length);
         for (int i = 0; i < strategies.length; i++) {
             entries.add(new TableEntry(strategies[i], points[i]));
         }
     }
 
+    public Table(Strategy[] strategies, AtomicInteger[] points) {
+        entries = new ArrayList<>(strategies.length);
+        for (int i = 0; i < strategies.length; i++) {
+            entries.add(new TableEntry(strategies[i], points[i].get()));
+        }
+    }
+
     public Collection<TableEntry> getAllEntries() {
-        List<TableEntry> result = new ArrayList<TableEntry>(entries);
+        List<TableEntry> result = new ArrayList<>(entries);
         Collections.sort(result);
         Collections.reverse(result);
         return result;
     }
 
     public Collection<TableEntry> getTopEntries(int count) {
-        SortedSet<TableEntry> result = new TreeSet<TableEntry>();
+        SortedSet<TableEntry> result = new TreeSet<>();
         TableEntry cutoffEntry = null;
 
         for (TableEntry entry : entries) {
-            int comp = (cutoffEntry != null) ? entry.compareTo(cutoffEntry) : -1;
-            if (comp < 0) {
+            int comp = (cutoffEntry != null) ? entry.compareTo(cutoffEntry) : +1;
+            if (comp > 0) {
                 if (result.size() < count) {
                     result.add(entry);
                     cutoffEntry = entry;
@@ -40,11 +48,11 @@ public class Table {
             } else if (comp == 0) {
                 if (result.size() < count)
                     result.add(entry);
-            } else if (comp > 0) {
+            } else if (comp < 0) {
                 if (result.size() == count)
                     result.remove(cutoffEntry);
                 result.add(entry);
-                cutoffEntry = result.first();
+                cutoffEntry = result.last();
             }
         }
 

@@ -1,5 +1,7 @@
 package com.mullekybernetik.gagame.match;
 
+import com.mullekybernetik.gagame.strategies.Strategy;
+
 public class Match {
 
     private static final int POINTS_FOR_SUCCESSFUL_BETRAYAL = 3;

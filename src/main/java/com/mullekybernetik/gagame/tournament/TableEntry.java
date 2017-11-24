@@ -1,15 +1,11 @@
 package com.mullekybernetik.gagame.tournament;
 
-import com.mullekybernetik.gagame.match.Strategy;
+import com.mullekybernetik.gagame.strategies.Strategy;
 
 public class TableEntry implements Comparable<TableEntry> {
 
-    private Strategy strategy;
-    private int points;
-
-    public TableEntry(Strategy strategy) {
-        this.strategy = strategy;
-    }
+    private final Strategy strategy;
+    private final int points;
 
     public TableEntry(Strategy strategy, int points) {
         this.strategy = strategy;
@@ -24,14 +20,8 @@ public class TableEntry implements Comparable<TableEntry> {
             return points;
         }
 
-    public void addToPoints(int somePoints) {
-            points += somePoints;
-        }
-
     public int compareTo(TableEntry other) {
-        if (other.points != this.points)
-            return this.points - other.points;
-        return this.strategy.hashCode() - other.strategy.hashCode();
+        return (other.points - this.points);  // order descending
     }
 
     @Override

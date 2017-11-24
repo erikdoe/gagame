@@ -9,7 +9,7 @@ public class TreeEncodedTest {
 
     @Test
     public void shouldCreateStrategyFromEightCharString() {
-        TreeEncoded strategy = new TreeEncoded("CDCDCDCD");
+        TreeEncoded strategy = new TreeEncoded("+-+-+-+-");
         Move[] encodedStrategy = strategy.getEncodedStrategy();
         assertEquals(8, encodedStrategy.length);
         for (int i = 0; i < 8; i += 2) {
@@ -20,7 +20,7 @@ public class TreeEncodedTest {
 
     @Test
     public void shouldCreateStrategyFromSixteenCharString() {
-        TreeEncoded strategy = new TreeEncoded("CCCCDDDDDDDDDDDD");
+        TreeEncoded strategy = new TreeEncoded("++++------------");
         Move[] encodedStrategy = strategy.getEncodedStrategy();
         assertEquals(16, encodedStrategy.length);
         for (int i = 0; i < 4; i++)
@@ -31,12 +31,12 @@ public class TreeEncodedTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowOnStringWithInvalidSize() {
-        new TreeEncoded("CCCCC");
+        new TreeEncoded("+++++");
     }
 
     @Test
     public void shouldCreateStrategyForNumber() {
-        TreeEncoded strategy = TreeEncoded.fromNumber(12, 4);  // 1100 = CCDD
+        TreeEncoded strategy = TreeEncoded.fromNumber(12, 4);  // 1100 = ++--
         Move[] encodedStrategy = strategy.getEncodedStrategy();
         assertEquals("Should have returned defect for 0", Move.DEFECT, encodedStrategy[0]);
         assertEquals("Should have returned defect for 1", Move.DEFECT, encodedStrategy[1]);
@@ -47,7 +47,7 @@ public class TreeEncodedTest {
 
     @Test
     public void shouldDetermineRightAnswerForCCCC() {
-        TreeEncoded strategy = new TreeEncoded("DDDDDDDDDDDDDDDC");
+        TreeEncoded strategy = new TreeEncoded("---------------+");
         strategy.newMatch();
         strategy.setOpponentsMove(Move.COOPERATE);
         strategy.setOpponentsMove(Move.COOPERATE);
@@ -59,7 +59,7 @@ public class TreeEncodedTest {
 
     @Test
     public void shouldDetermineRightAnswerForDCCC() {
-        TreeEncoded strategy = new TreeEncoded("DDDDDDDDDDDDDDCD");
+        TreeEncoded strategy = new TreeEncoded("--------------+-");
         strategy.newMatch();
         strategy.setOpponentsMove(Move.DEFECT);
         strategy.setOpponentsMove(Move.COOPERATE);
@@ -71,7 +71,7 @@ public class TreeEncodedTest {
 
     @Test
     public void shouldDetermineRightAnswerForCCCD() {
-        TreeEncoded strategy = new TreeEncoded("DDDDDDDCDDDDDDDD");
+        TreeEncoded strategy = new TreeEncoded("-------+--------");
         strategy.newMatch();
         strategy.setOpponentsMove(Move.COOPERATE);
         strategy.setOpponentsMove(Move.COOPERATE);
@@ -83,19 +83,19 @@ public class TreeEncodedTest {
 
     @Test
     public void shouldDetermineRightAnswerForCCDD() {
-        TreeEncoded strategy = new TreeEncoded("DDDCDDDDDDDDDDDD");
+        TreeEncoded strategy = new TreeEncoded("---+------------");
         strategy.newMatch();
         strategy.setOpponentsMove(Move.COOPERATE);
         strategy.setOpponentsMove(Move.COOPERATE);
         strategy.setOpponentsMove(Move.DEFECT);
         strategy.setOpponentsMove(Move.DEFECT);
 
-        assertEquals("Should have returned rightmost value in leftmost quater", Move.COOPERATE, strategy.getMove());
+        assertEquals("Should have returned rightmost value in leftmost quarter", Move.COOPERATE, strategy.getMove());
     }
 
     @Test
     public void shouldDetermineRightAnswerForCDCD() {
-        TreeEncoded strategy = new TreeEncoded("DDDDDCDDDDDDDDDD");
+        TreeEncoded strategy = new TreeEncoded("-----+----------");
         strategy.newMatch();
         strategy.setOpponentsMove(Move.COOPERATE);
         strategy.setOpponentsMove(Move.DEFECT);

@@ -1,7 +1,6 @@
 package com.mullekybernetik.gagame.strategies;
 
 import com.mullekybernetik.gagame.match.Move;
-import com.mullekybernetik.gagame.match.Strategy;
 
 public class TreeEncoded extends StrategyBase implements Strategy {
 
@@ -24,7 +23,7 @@ public class TreeEncoded extends StrategyBase implements Strategy {
     *     L2        (*)       *
     *     L3            (*)
     *
-    * For the example above we would go left in L3, right in L2, and right again in L3, resulting in C as a
+    * For the example above we would go left in L3, right in L2, and right again in L1, resulting in C as a
     * response to the opponent's move sequence of CCD.
     *
     * Note that this encoding keeps the outcomes close together that have similar recent moves, or in other
@@ -32,22 +31,32 @@ public class TreeEncoded extends StrategyBase implements Strategy {
     *
     */
 
+    // maybe add third letter "R" for "make random choice"
+    // allow variable length strategies, then D, C, DC, RR are standard strategies
+    // ^ what happens with strategy in first move, i.e. is DC really tit for tat?
+
     public static TreeEncoded fromNumber(int number, int bits) {
         char[] encoding = new char[bits];
         for (int i = 0; i < encoding.length; i++) {
-            encoding[i] = ((number & 1) == 1) ? 'C' : 'D';
+            encoding[i] = ((number & 1) == 1) ? '+' : '-';
             number >>= 1;
         }
         return new TreeEncoded(new String(encoding));
     }
 
 
-    public TreeEncoded(String encoding) {
+    protected TreeEncoded(String encoding) {
         depth = calcDepth(encoding.length());
         this.strategyString = encoding;
         strategy = new Move[1 << depth];
         for (int i = 0; i < strategy.length; i++)
-            strategy[i] = (encoding.charAt(i) == 'C') ? Move.COOPERATE : Move.DEFECT;
+            strategy[i] = (encoding.charAt(i) == '+') ? Move.COOPERATE : Move.DEFECT;
+    }
+
+    private TreeEncoded(int depth, String strategyString, Move[] strategy) {
+        this.depth = depth;
+        this.strategyString = strategyString;
+        this.strategy = strategy;
     }
 
     private int calcDepth(int size) {
@@ -87,8 +96,14 @@ public class TreeEncoded extends StrategyBase implements Strategy {
         return strategy[position];
     }
 
+    public Strategy clone() {
+        return new TreeEncoded(depth, strategyString, strategy);
+    }
+
+    @Override
     public String toString() {
         return "[" + strategyString + "]";
     }
+
 
 }

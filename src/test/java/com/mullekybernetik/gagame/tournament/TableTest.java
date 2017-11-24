@@ -1,6 +1,6 @@
 package com.mullekybernetik.gagame.tournament;
 
-import com.mullekybernetik.gagame.match.Strategy;
+import com.mullekybernetik.gagame.strategies.Strategy;
 import com.mullekybernetik.gagame.strategies.Cooperator;
 import com.mullekybernetik.gagame.strategies.Defector;
 import com.mullekybernetik.gagame.strategies.RandomChoice;
@@ -29,26 +29,37 @@ public class TableTest {
         cooperator = new Cooperator();
         random = new RandomChoice();
         titForTat = new TitForTat();
-        table = new Table(new Strategy[]{cooperator, defector, random, titForTat}, new int[]{2, 5, 4, 4});
+        table = new Table(new Strategy[]{cooperator, defector, random, titForTat, random}, new int[]{2, 6, 4, 5, 4});
     }
 
     @Test
-    public void shouldReturnTopStrategies() {
+    public void shouldReturnTopStrategy() {
         Collection<TableEntry> result = table.getTopEntries(1);
 
         assertEquals("Should return only the winner", 1, result.size());
         List<Strategy> winners = getStrategies(result);
-        assertTrue("Defector should be the winner", winners.contains(defector));
+        assertEquals("Defector should be the winner", defector, winners.get(0));
     }
 
     @Test
-    public void shouldSelectBestTwoFromGroupWithAmbiguity() {
+    public void shouldReturnTopTwoStrategies() {
         Collection<TableEntry> result = table.getTopEntries(2);
 
-        assertEquals("Should return two winners", 2, result.size());
+        assertEquals("Should return the top 2", 2, result.size());
         List<Strategy> winners = getStrategies(result);
-        assertTrue("Defector should be a winner", winners.contains(defector));
-        assertTrue("A non-defector should be a winner, too", winners.contains(titForTat) || winners.contains(random));
+        assertEquals("Defector should be the winner", defector, winners.get(0));
+        assertEquals("Tit-for-tat should be runner-up", titForTat, winners.get(1));
+    }
+
+    @Test
+    public void shouldSelectWithAmbiguity() {
+        Collection<TableEntry> result = table.getTopEntries(3);
+
+        assertEquals("Should return three winners", 3, result.size());
+        List<Strategy> winners = getStrategies(result);
+        assertEquals("Defector should be the winner", defector, winners.get(0));
+        assertEquals("Tit-for-tat should be runner-up", titForTat, winners.get(1));
+        assertEquals("Random should be third", random, winners.get(2));
     }
 
     private List<Strategy> getStrategies(Collection<TableEntry> entries) {
