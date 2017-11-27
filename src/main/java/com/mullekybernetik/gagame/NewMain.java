@@ -3,7 +3,7 @@ package com.mullekybernetik.gagame;
 import com.mullekybernetik.gagame.match.MatchRunner;
 import com.mullekybernetik.gagame.strategies.Strategy;
 import com.mullekybernetik.gagame.strategies.*;
-import com.mullekybernetik.gagame.tournament.ExhaustiveTournament;
+import com.mullekybernetik.gagame.tournament.AllPairingsFactory;
 import com.mullekybernetik.gagame.tournament.Table;
 import com.mullekybernetik.gagame.tournament.TableEntry;
 import com.mullekybernetik.gagame.tournament.Tournament;
@@ -32,7 +32,7 @@ public class NewMain {
                 population.addAll(seedStrategies);
                 population.addAll(createRandomTreeStrategies(POPULATION_SIZE - seedStrategies.size()));
 
-                Tournament tournament = new ExhaustiveTournament(new MatchRunner());
+                Tournament tournament = new Tournament(new MatchRunner(), new AllPairingsFactory());
                 Table result = tournament.runTournament(population, ROUNDS_PER_MATCH);
 
                 seedStrategies = createNextSeedPopulation(result);

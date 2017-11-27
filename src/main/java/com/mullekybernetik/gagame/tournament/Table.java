@@ -30,7 +30,6 @@ public class Table {
     public Collection<TableEntry> getAllEntries() {
         List<TableEntry> result = new ArrayList<>(entries);
         Collections.sort(result);
-        Collections.reverse(result);
         return result;
     }
 
