@@ -1,6 +1,6 @@
 package com.mullekybernetik.gagame.match;
 
-import com.mullekybernetik.gagame.strategies.Strategy;
+import com.mullekybernetik.gagame.strategies.Player;
 
 public class Match {
 
@@ -9,16 +9,14 @@ public class Match {
     private static final int POINTS_FOR_MUTUAL_BETRAYAL = 1;
     private static final int POINTS_FOR_UNSUCCESSFUL_COOPERATION = 0;
 
-    private final Strategy a;
-    private final Strategy b;
+    private final Player a;
+    private final Player b;
     private Score score;
 
-    public Match(Strategy a, Strategy b) {
+    public Match(Player a, Player b) {
         this.a = a;
         this.b = b;
         this.score = new Score();
-        a.newMatch();
-        b.newMatch();
     }
 
     public void playRound() {

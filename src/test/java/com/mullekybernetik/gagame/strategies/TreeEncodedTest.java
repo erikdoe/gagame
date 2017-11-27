@@ -48,61 +48,61 @@ public class TreeEncodedTest {
     @Test
     public void shouldDetermineRightAnswerForCCCC() {
         TreeEncoded strategy = new TreeEncoded("---------------+");
-        strategy.newMatch();
-        strategy.setOpponentsMove(Move.COOPERATE);
-        strategy.setOpponentsMove(Move.COOPERATE);
-        strategy.setOpponentsMove(Move.COOPERATE);
-        strategy.setOpponentsMove(Move.COOPERATE);
+        Player player = strategy.instantiate();
+        player.setOpponentsMove(Move.COOPERATE);
+        player.setOpponentsMove(Move.COOPERATE);
+        player.setOpponentsMove(Move.COOPERATE);
+        player.setOpponentsMove(Move.COOPERATE);
 
-        assertEquals("Should have returned rightmost value", Move.COOPERATE, strategy.getMove());
+        assertEquals("Should have returned rightmost value", Move.COOPERATE, player.getMove());
     }
 
     @Test
     public void shouldDetermineRightAnswerForDCCC() {
         TreeEncoded strategy = new TreeEncoded("--------------+-");
-        strategy.newMatch();
-        strategy.setOpponentsMove(Move.DEFECT);
-        strategy.setOpponentsMove(Move.COOPERATE);
-        strategy.setOpponentsMove(Move.COOPERATE);
-        strategy.setOpponentsMove(Move.COOPERATE);
+        Player player = strategy.instantiate();
+        player.setOpponentsMove(Move.DEFECT);
+        player.setOpponentsMove(Move.COOPERATE);
+        player.setOpponentsMove(Move.COOPERATE);
+        player.setOpponentsMove(Move.COOPERATE);
 
-        assertEquals("Should have returned second rightmost value", Move.COOPERATE, strategy.getMove());
+        assertEquals("Should have returned second rightmost value", Move.COOPERATE, player.getMove());
     }
 
     @Test
     public void shouldDetermineRightAnswerForCCCD() {
         TreeEncoded strategy = new TreeEncoded("-------+--------");
-        strategy.newMatch();
-        strategy.setOpponentsMove(Move.COOPERATE);
-        strategy.setOpponentsMove(Move.COOPERATE);
-        strategy.setOpponentsMove(Move.COOPERATE);
-        strategy.setOpponentsMove(Move.DEFECT);
+        Player player = strategy.instantiate();
+        player.setOpponentsMove(Move.COOPERATE);
+        player.setOpponentsMove(Move.COOPERATE);
+        player.setOpponentsMove(Move.COOPERATE);
+        player.setOpponentsMove(Move.DEFECT);
 
-        assertEquals("Should have returned rightmost value in left half", Move.COOPERATE, strategy.getMove());
+        assertEquals("Should have returned rightmost value in left half", Move.COOPERATE, player.getMove());
     }
 
     @Test
     public void shouldDetermineRightAnswerForCCDD() {
         TreeEncoded strategy = new TreeEncoded("---+------------");
-        strategy.newMatch();
-        strategy.setOpponentsMove(Move.COOPERATE);
-        strategy.setOpponentsMove(Move.COOPERATE);
-        strategy.setOpponentsMove(Move.DEFECT);
-        strategy.setOpponentsMove(Move.DEFECT);
+        Player player = strategy.instantiate();
+        player.setOpponentsMove(Move.COOPERATE);
+        player.setOpponentsMove(Move.COOPERATE);
+        player.setOpponentsMove(Move.DEFECT);
+        player.setOpponentsMove(Move.DEFECT);
 
-        assertEquals("Should have returned rightmost value in leftmost quarter", Move.COOPERATE, strategy.getMove());
+        assertEquals("Should have returned rightmost value in leftmost quarter", Move.COOPERATE, player.getMove());
     }
 
     @Test
     public void shouldDetermineRightAnswerForCDCD() {
         TreeEncoded strategy = new TreeEncoded("-----+----------");
-        strategy.newMatch();
-        strategy.setOpponentsMove(Move.COOPERATE);
-        strategy.setOpponentsMove(Move.DEFECT);
-        strategy.setOpponentsMove(Move.COOPERATE);
-        strategy.setOpponentsMove(Move.DEFECT);
+        Player player = strategy.instantiate();
+        player.setOpponentsMove(Move.COOPERATE);
+        player.setOpponentsMove(Move.DEFECT);
+        player.setOpponentsMove(Move.COOPERATE);
+        player.setOpponentsMove(Move.DEFECT);
 
-        assertEquals("Should have returned sixth value", Move.COOPERATE, strategy.getMove());
+        assertEquals("Should have returned sixth value", Move.COOPERATE, player.getMove());
     }
 
 

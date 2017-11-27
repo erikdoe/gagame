@@ -2,9 +2,10 @@ package com.mullekybernetik.gagame.strategies;
 
 import com.mullekybernetik.gagame.match.Move;
 
-public class Defector extends StrategyBase implements Strategy {
+public class Defector extends StrategyBase implements Strategy, Player {
 
-    public void newMatch() {
+    public Player instantiate() {
+        return this;
     }
 
     public Move getMove() {
@@ -12,10 +13,6 @@ public class Defector extends StrategyBase implements Strategy {
     }
 
     public void setOpponentsMove(Move m) {
-    }
-
-    public Strategy clone() {
-        return this;
     }
 
     @Override

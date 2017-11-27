@@ -7,8 +7,6 @@ public class TreeEncoded extends StrategyBase implements Strategy {
     private int depth;
     private String strategyString;
     private Move[] strategy;
-    private Move[] memory;
-    private int memoryPtr;
 
     /* 
     * The encoding can be understood as labels at the top of a decision tree. The last move is at the
@@ -44,7 +42,6 @@ public class TreeEncoded extends StrategyBase implements Strategy {
         return new TreeEncoded(new String(encoding));
     }
 
-
     protected TreeEncoded(String encoding) {
         depth = calcDepth(encoding.length());
         this.strategyString = encoding;
@@ -68,36 +65,12 @@ public class TreeEncoded extends StrategyBase implements Strategy {
         return depth;
     }
 
+    public Player instantiate() {
+        return new TreeEncodedPlayer();
+    }
+
     public Move[] getEncodedStrategy() {
         return strategy;
-    }
-
-    public void newMatch() {
-        memory = new Move[depth];
-        for (int i = 0; i < memory.length; i++)
-            memory[i] = Move.DEFECT;
-        memoryPtr = 0;
-    }
-
-    public void setOpponentsMove(Move m) {
-        memoryPtr = (memoryPtr + (depth - 1)) % depth;
-        memory[memoryPtr] = m;
-    }
-
-    public Move getMove() {
-        int position = 0;
-        int p = memoryPtr;
-        for (int i = 0; i < depth; i++) {
-            position *= 2;
-            if (memory[p] == Move.COOPERATE)
-                position += 1;
-            p = (p + 1) % depth;
-        }
-        return strategy[position];
-    }
-
-    public Strategy clone() {
-        return new TreeEncoded(depth, strategyString, strategy);
     }
 
     @Override
@@ -105,5 +78,36 @@ public class TreeEncoded extends StrategyBase implements Strategy {
         return "[" + strategyString + "]";
     }
 
+
+    private class TreeEncodedPlayer implements Player {
+
+        private Move[] memory;
+        private int memoryPtr;
+
+        public TreeEncodedPlayer() {
+            memory = new Move[depth];
+            for (int i = 0; i < memory.length; i++)
+                memory[i] = Move.DEFECT;
+            memoryPtr = 0;
+        }
+
+        public void setOpponentsMove(Move m) {
+            memoryPtr = (memoryPtr + (depth - 1)) % depth;
+            memory[memoryPtr] = m;
+        }
+
+        public Move getMove() {
+            int position = 0;
+            int p = memoryPtr;
+            for (int i = 0; i < depth; i++) {
+                position *= 2;
+                if (memory[p] == Move.COOPERATE)
+                    position += 1;
+                p = (p + 1) % depth;
+            }
+            return strategy[position];
+        }
+
+    }
 
 }

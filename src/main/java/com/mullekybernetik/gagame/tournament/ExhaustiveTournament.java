@@ -37,7 +37,7 @@ public class ExhaustiveTournament implements Tournament {
         }
 
         pairings.parallelStream().forEach(p -> {
-            Score score = matchRunner.runMatch(strategies[p.ai].clone(), strategies[p.bi].clone(), roundsPerMatch);
+            Score score = matchRunner.runMatch(strategies[p.ai], strategies[p.bi], roundsPerMatch);
             totalPoints[p.ai].addAndGet(score.a);
             totalPoints[p.bi].addAndGet(score.b);
         });

@@ -8,20 +8,20 @@ public class TitForTatTest {
 
     @Test
     public void shouldFirstCooperate() {
-        TitForTat tft = new TitForTat();
+        Player tft = new TitForTat().instantiate();
         Assert.assertEquals(Move.COOPERATE, tft.getMove());
     }
 
     @Test
     public void shouldCooperateWhenOpponentCooperated() {
-        TitForTat tft = new TitForTat();
+        Player tft = new TitForTat().instantiate();
         tft.setOpponentsMove(Move.COOPERATE);
         Assert.assertEquals(Move.COOPERATE, tft.getMove());
     }
 
     @Test
     public void shouldDefectWhenOpponentDefected() {
-        TitForTat tft = new TitForTat();
+        Player tft = new TitForTat().instantiate();
         tft.setOpponentsMove(Move.DEFECT);
         Assert.assertEquals(Move.DEFECT, tft.getMove());
     }

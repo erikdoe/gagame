@@ -4,11 +4,12 @@ import com.mullekybernetik.gagame.match.Move;
 
 import java.util.Random;
 
-public class RandomChoice extends StrategyBase implements Strategy {
+public class RandomChoice extends StrategyBase implements Strategy, Player {
 
     static private Random generator = new Random();
 
-    public void newMatch() {
+    public Player instantiate() {
+        return this;
     }
 
     public Move getMove() {
@@ -16,10 +17,6 @@ public class RandomChoice extends StrategyBase implements Strategy {
     }
 
     public void setOpponentsMove(Move m) {
-    }
-
-    public Strategy clone() {
-        return this;
     }
 
     @Override

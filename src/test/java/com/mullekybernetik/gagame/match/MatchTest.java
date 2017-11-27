@@ -2,6 +2,7 @@ package com.mullekybernetik.gagame.match;
 
 import com.mullekybernetik.gagame.strategies.Cooperator;
 import com.mullekybernetik.gagame.strategies.Defector;
+import com.mullekybernetik.gagame.strategies.Player;
 import com.mullekybernetik.gagame.strategies.Strategy;
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,18 +15,16 @@ import static org.mockito.Mockito.when;
 public class MatchTest {
 
     @Test
-    public void shouldProvideStrategiesWithResultsForSingleRound() {
-        Strategy alice = mock(Strategy.class);
+    public void shouldProvidePlayersWithResultsForSingleRound() {
+        Player alice = mock(Player.class);
         when(alice.getMove()).thenReturn(Move.DEFECT);
-        Strategy bob = mock(Strategy.class);
+        Player bob = mock(Player.class);
         when(bob.getMove()).thenReturn(Move.COOPERATE);
 
         Match match = new Match(alice, bob);
         match.playRound();
 
-        verify(alice).newMatch();
         verify(alice).setOpponentsMove(Move.COOPERATE);
-        verify(bob).newMatch();
         verify(bob).setOpponentsMove(Move.DEFECT);
     }
 
