@@ -3,14 +3,12 @@ package com.mullekybernetik.gagame.match;
 import com.mullekybernetik.gagame.strategies.Cooperator;
 import com.mullekybernetik.gagame.strategies.Defector;
 import com.mullekybernetik.gagame.strategies.Player;
-import com.mullekybernetik.gagame.strategies.Strategy;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static com.mullekybernetik.gagame.match.Match.*;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class MatchTest {
 
@@ -34,8 +32,8 @@ public class MatchTest {
         match.playRound();
         Score score = match.getScore();
 
-        assertEquals(2, score.a);
-        assertEquals(2, score.b);
+        assertEquals(POINTS_FOR_SUCCESSFUL_COOPERATION, score.a);
+        assertEquals(POINTS_FOR_SUCCESSFUL_COOPERATION, score.b);
     }
 
     @Test
@@ -44,8 +42,8 @@ public class MatchTest {
         match.playRound();
         Score score = match.getScore();
 
-        Assert.assertEquals(0, score.a);
-        Assert.assertEquals(3, score.b);
+        Assert.assertEquals(POINTS_FOR_UNSUCCESSFUL_COOPERATION, score.a);
+        Assert.assertEquals(POINTS_FOR_SUCCESSFUL_BETRAYAL, score.b);
     }
 
     @Test
@@ -54,8 +52,8 @@ public class MatchTest {
         match.playRound();
         Score score = match.getScore();
 
-        Assert.assertEquals(3, score.a);
-        Assert.assertEquals(0, score.b);
+        Assert.assertEquals(POINTS_FOR_SUCCESSFUL_BETRAYAL, score.a);
+        Assert.assertEquals(POINTS_FOR_UNSUCCESSFUL_COOPERATION, score.b);
     }
 
     @Test
@@ -64,8 +62,8 @@ public class MatchTest {
         match.playRound();
         Score score = match.getScore();
 
-        Assert.assertEquals(1, score.a);
-        Assert.assertEquals(1, score.b);
+        Assert.assertEquals(POINTS_FOR_MUTUAL_BETRAYAL, score.a);
+        Assert.assertEquals(POINTS_FOR_MUTUAL_BETRAYAL, score.b);
     }
 
 }

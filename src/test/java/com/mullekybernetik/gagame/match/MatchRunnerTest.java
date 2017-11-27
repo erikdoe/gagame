@@ -5,8 +5,7 @@ import com.mullekybernetik.gagame.strategies.Defector;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
+import static com.mullekybernetik.gagame.match.Match.POINTS_FOR_SUCCESSFUL_BETRAYAL;
 
 public class MatchRunnerTest {
 
@@ -16,7 +15,7 @@ public class MatchRunnerTest {
         Score score = matchRunner.runMatch(new Cooperator(), new Defector(), 2);
 
         Assert.assertEquals("Should have right number of points for cooperator", 0, score.a);
-        Assert.assertEquals("Should have right number of points for defector", 6, score.b);
+        Assert.assertEquals("Should have right number of points for defector", 2 * POINTS_FOR_SUCCESSFUL_BETRAYAL, score.b);
     }
 
 }

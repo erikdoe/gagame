@@ -4,10 +4,10 @@ import com.mullekybernetik.gagame.strategies.Player;
 
 public class Match {
 
-    private static final int POINTS_FOR_SUCCESSFUL_BETRAYAL = 3;
-    private static final int POINTS_FOR_SUCCESSFUL_COOPERATION = 2;
-    private static final int POINTS_FOR_MUTUAL_BETRAYAL = 1;
-    private static final int POINTS_FOR_UNSUCCESSFUL_COOPERATION = 0;
+    public static final int POINTS_FOR_SUCCESSFUL_BETRAYAL = 3;
+    public static final int POINTS_FOR_SUCCESSFUL_COOPERATION = 2;
+    public static final int POINTS_FOR_MUTUAL_BETRAYAL = 1;
+    public static final int POINTS_FOR_UNSUCCESSFUL_COOPERATION = 0;
 
     private final Player a;
     private final Player b;
