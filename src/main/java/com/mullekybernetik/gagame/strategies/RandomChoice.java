@@ -4,7 +4,7 @@ import com.mullekybernetik.gagame.match.Move;
 
 import java.util.Random;
 
-public class RandomChoice extends StrategyBase implements Strategy, Player {
+public class RandomChoice implements Strategy, Player {
 
     static private Random generator = new Random();
 

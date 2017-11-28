@@ -2,7 +2,7 @@ package com.mullekybernetik.gagame.strategies;
 
 import com.mullekybernetik.gagame.match.Move;
 
-public class TitForTat extends StrategyBase implements Strategy {
+public class TitForTat implements Strategy {
 
     public Player instantiate() {
         return new TitForTatPlayer();

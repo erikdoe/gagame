@@ -2,7 +2,7 @@ package com.mullekybernetik.gagame.strategies;
 
 import com.mullekybernetik.gagame.match.Move;
 
-public class Defector extends StrategyBase implements Strategy, Player {
+public class Defector implements Strategy, Player {
 
     public Player instantiate() {
         return this;

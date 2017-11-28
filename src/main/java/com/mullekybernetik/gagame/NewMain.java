@@ -7,20 +7,18 @@ import com.mullekybernetik.gagame.tournament.AllPairingsFactory;
 import com.mullekybernetik.gagame.tournament.Table;
 import com.mullekybernetik.gagame.tournament.TableEntry;
 import com.mullekybernetik.gagame.tournament.Tournament;
+import com.mullekybernetik.gagame.util.StringGenerator;
 
 import java.util.*;
 
 public class NewMain {
 
-    private static final int POPULATION_SIZE = 1000;
-    private static final int TOURNAMENTS_PER_SEARCH = 400;
-    private static final int ROUNDS_PER_MATCH = 7;
-    private static final int STRATEGY_SIZE = 16;
-
-    private static Random random = new Random();
+    private static final int POPULATION_SIZE = 500;
+    private static final int TOURNAMENTS_PER_SEARCH = 1000;
+    private static final int ROUNDS_PER_MATCH = 10;
+    private static final int STRATEGY_SIZE = 15;
 
     public static void main(String[] args) {
-
 
         while (true) {
 
@@ -30,7 +28,7 @@ public class NewMain {
 
                 List<Strategy> population = new ArrayList<>();
                 population.addAll(seedStrategies);
-                population.addAll(createRandomTreeStrategies(POPULATION_SIZE - seedStrategies.size()));
+                population.addAll(createRandomEncodedStrategies(POPULATION_SIZE - seedStrategies.size()));
 
                 Tournament tournament = new Tournament(new MatchRunner(), new AllPairingsFactory());
                 Table result = tournament.runTournament(population, ROUNDS_PER_MATCH);
@@ -61,17 +59,17 @@ public class NewMain {
         return strategies;
     }
 
-    private static Collection<Strategy> createRandomTreeStrategies(int count) {
+    private static Collection<Strategy> createRandomEncodedStrategies(int count) {
+        StringGenerator generator = new StringGenerator("-+");
         Collection<Strategy> strategies = new ArrayList<>(count);
         for (int i = 0; i < count; i++) {
-            int r = random.nextInt(1 << STRATEGY_SIZE);
-            strategies.add(TreeEncoded.fromNumber(r, STRATEGY_SIZE));
+            strategies.add(new EncodedStrategy(generator.randomString(STRATEGY_SIZE)));
         }
         return strategies;
     }
 
     private static void logProgress(int i, Table result) {
-        if (i % 20 == 0) {
+        if (i % (TOURNAMENTS_PER_SEARCH / 20) == 0) {
             System.out.print(".");
         }
         if (i == 1) {

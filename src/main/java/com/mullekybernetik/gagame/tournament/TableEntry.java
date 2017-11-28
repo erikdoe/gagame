@@ -24,9 +24,4 @@ public class TableEntry implements Comparable<TableEntry> {
         return (other.points - this.points);  // order descending
     }
 
-    @Override
-    public String toString() {
-        return strategy.getClass().getName() + " " + points;
-    }
-
 }

@@ -27,13 +27,17 @@ public class Table {
         }
     }
 
-    public Collection<TableEntry> getAllEntries() {
+    public List<TableEntry> getAllEntries() {
         List<TableEntry> result = new ArrayList<>(entries);
         Collections.sort(result);
         return result;
     }
 
     public Collection<TableEntry> getTopEntries(int count) {
+
+        return getAllEntries().subList(0, count);
+
+/*
         SortedSet<TableEntry> result = new TreeSet<>();
         TableEntry cutoffEntry = null;
 
@@ -56,6 +60,8 @@ public class Table {
         }
 
         return result;
+*/
+
     }
 
 }
