@@ -15,8 +15,9 @@ public class NewMain {
 
     private static final int POPULATION_SIZE = 500;
     private static final int TOURNAMENTS_PER_SEARCH = 1000;
-    private static final int ROUNDS_PER_MATCH = 10;
     private static final int STRATEGY_SIZE = 15;
+    // 32.768 strategies, 200 new random per tournament * 1000 tournaments = 200.000 strategies created
+    private static final int ROUNDS_PER_MATCH = 20;
 
     public static void main(String[] args) {
 
