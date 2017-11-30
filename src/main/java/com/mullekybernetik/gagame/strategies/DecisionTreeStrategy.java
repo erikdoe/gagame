@@ -2,13 +2,13 @@ package com.mullekybernetik.gagame.strategies;
 
 import com.mullekybernetik.gagame.match.Move;
 
-public class EncodedStrategy implements Strategy {
+public class DecisionTreeStrategy implements Strategy {
 
     private String stringRepresentation;
     private int strategy;
     private int depth;
 
-    public EncodedStrategy(String stringRepresentation) {
+    public DecisionTreeStrategy(String stringRepresentation) {
         this.stringRepresentation = stringRepresentation;
         this.strategy = calcNumericalRepresentation(stringRepresentation);
         this.depth = calcDepth(stringRepresentation.length());
@@ -35,10 +35,19 @@ public class EncodedStrategy implements Strategy {
         return depth;
     }
 
-    public int getNumericalRepresentation() {
+    protected int getNumericalRepresentation() {
         return strategy;
     }
 
+    protected int getDepth() {
+        return depth;
+    }
+
+    public Player instantiate() {
+        return new PlayerImpl();
+    }
+
+    @Override
     public String toString() {
         String s = "";
         int j = 0;
@@ -56,22 +65,19 @@ public class EncodedStrategy implements Strategy {
         return s;
     }
 
-    public Player instantiate() {
-        return new PlayerImpl();
+    @Override
+    public boolean equals(Object other) {
+        return (other instanceof DecisionTreeStrategy)
+                && stringRepresentation.equals(((DecisionTreeStrategy)other).stringRepresentation);
     }
 
-    public int getDepth() {
-        return depth;
-    }
 
-
-    public class PlayerImpl implements Player {
+    protected class PlayerImpl implements Player {
 
         private int mdepth;
         private int memory;
 
         public Move getMove() {
-
             int shift = (1 << mdepth) - 1;
             int mask = (1 << (1 << mdepth)) - 1;
 
@@ -86,18 +92,17 @@ public class EncodedStrategy implements Strategy {
         }
 
         public void setOpponentsMove(Move m) {
-
             memory <<= 1;
 
             int mask = (1 << depth) - 1;
             memory &= mask;
 
             if (m == Move.COOPERATE) {
-                memory |= 1;
+                memory |= 0x1;
             }
         }
 
-        public int getMemory() {
+        protected int getMemory() {
             return memory;
         }
     }

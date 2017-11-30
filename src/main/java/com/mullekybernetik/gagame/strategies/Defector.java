@@ -20,4 +20,7 @@ public class Defector implements Strategy, Player {
         return "Defector";
     }
 
+    @Override
+    public boolean equals(Object other) { return other instanceof Defector; }
+
 }

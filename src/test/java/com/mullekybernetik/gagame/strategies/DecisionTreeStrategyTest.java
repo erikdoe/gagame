@@ -5,12 +5,12 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class EncodedStrategyTest {
+public class DecisionTreeStrategyTest {
 
     @Test
     public void shouldCreateNumericalEncodingFromString() {
 
-        EncodedStrategy strategy = new EncodedStrategy("--+---+");
+        DecisionTreeStrategy strategy = new DecisionTreeStrategy("--+---+");
         int numericalRepresentation = strategy.getNumericalRepresentation();
         assertEquals("Number should have used bits in reverse order", 68, numericalRepresentation);
     }
@@ -18,7 +18,7 @@ public class EncodedStrategyTest {
     @Test
     public void shouldCalculateStrategyDepth() {
 
-        EncodedStrategy strategy = new EncodedStrategy("+-+---+-------+");
+        DecisionTreeStrategy strategy = new DecisionTreeStrategy("+-+---+-------+");
         int depth = strategy.getDepth();
         assertEquals("Depth should be log(x) of longest block", 3, depth);
     }
@@ -26,8 +26,8 @@ public class EncodedStrategyTest {
     @Test
     public void playerShouldRepresentMovesAsBitsInMemory() {
 
-        EncodedStrategy strategy = new EncodedStrategy("+-+---+-------+");
-        EncodedStrategy.PlayerImpl player = (EncodedStrategy.PlayerImpl) strategy.instantiate();
+        DecisionTreeStrategy strategy = new DecisionTreeStrategy("+-+---+-------+");
+        DecisionTreeStrategy.PlayerImpl player = (DecisionTreeStrategy.PlayerImpl) strategy.instantiate();
         player.setOpponentsMove(Move.COOPERATE);
         player.setOpponentsMove(Move.COOPERATE);
         player.setOpponentsMove(Move.DEFECT);
@@ -40,8 +40,8 @@ public class EncodedStrategyTest {
     @Test
     public void playerShouldCapMemoryAtDepth() {
 
-        EncodedStrategy strategy = new EncodedStrategy("+-+---+");
-        EncodedStrategy.PlayerImpl player = (EncodedStrategy.PlayerImpl) strategy.instantiate();
+        DecisionTreeStrategy strategy = new DecisionTreeStrategy("+-+---+");
+        DecisionTreeStrategy.PlayerImpl player = (DecisionTreeStrategy.PlayerImpl) strategy.instantiate();
         player.setOpponentsMove(Move.COOPERATE);
         player.setOpponentsMove(Move.COOPERATE);
         player.setOpponentsMove(Move.DEFECT);
@@ -53,8 +53,8 @@ public class EncodedStrategyTest {
 
     @Test
     public void playerShouldUseLowestBitToDetermineInitialMove() {
-        EncodedStrategy strategy = new EncodedStrategy("+--");
-        EncodedStrategy.PlayerImpl player = (EncodedStrategy.PlayerImpl) strategy.instantiate();
+        DecisionTreeStrategy strategy = new DecisionTreeStrategy("+--");
+        DecisionTreeStrategy.PlayerImpl player = (DecisionTreeStrategy.PlayerImpl) strategy.instantiate();
 
         Move move = player.getMove();
 
@@ -63,8 +63,8 @@ public class EncodedStrategyTest {
 
     @Test
     public void playerShouldUseLowestBitInSecondBlockToDetermineResponseToDefect() {
-        EncodedStrategy strategy = new EncodedStrategy("-+-");
-        EncodedStrategy.PlayerImpl player = (EncodedStrategy.PlayerImpl) strategy.instantiate();
+        DecisionTreeStrategy strategy = new DecisionTreeStrategy("-+-");
+        DecisionTreeStrategy.PlayerImpl player = (DecisionTreeStrategy.PlayerImpl) strategy.instantiate();
 
         player.getMove();
         player.setOpponentsMove(Move.DEFECT);
@@ -75,8 +75,8 @@ public class EncodedStrategyTest {
 
     @Test
     public void playerShouldOnlyConsiderCorrectBitWhenDeterminingResponse() {
-        EncodedStrategy strategy = new EncodedStrategy("+-+");
-        EncodedStrategy.PlayerImpl player = (EncodedStrategy.PlayerImpl) strategy.instantiate();
+        DecisionTreeStrategy strategy = new DecisionTreeStrategy("+-+");
+        DecisionTreeStrategy.PlayerImpl player = (DecisionTreeStrategy.PlayerImpl) strategy.instantiate();
 
         player.getMove();
         player.setOpponentsMove(Move.DEFECT);
@@ -87,8 +87,8 @@ public class EncodedStrategyTest {
 
     @Test
     public void playerShouldUseCorrectBitInThirdBlockToDetermineResponse() {
-        EncodedStrategy strategy = new EncodedStrategy("----+--");
-        EncodedStrategy.PlayerImpl player = (EncodedStrategy.PlayerImpl) strategy.instantiate();
+        DecisionTreeStrategy strategy = new DecisionTreeStrategy("----+--");
+        DecisionTreeStrategy.PlayerImpl player = (DecisionTreeStrategy.PlayerImpl) strategy.instantiate();
 
         player.getMove();
         player.setOpponentsMove(Move.DEFECT);
@@ -101,8 +101,8 @@ public class EncodedStrategyTest {
 
     @Test
     public void playerShouldIgnoreMovesBeyondDepthOfStrategy() {
-        EncodedStrategy strategy = new EncodedStrategy("----+--");
-        EncodedStrategy.PlayerImpl player = (EncodedStrategy.PlayerImpl) strategy.instantiate();
+        DecisionTreeStrategy strategy = new DecisionTreeStrategy("----+--");
+        DecisionTreeStrategy.PlayerImpl player = (DecisionTreeStrategy.PlayerImpl) strategy.instantiate();
 
         player.getMove();
         player.setOpponentsMove(Move.COOPERATE);

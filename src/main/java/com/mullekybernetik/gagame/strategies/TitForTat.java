@@ -13,8 +13,11 @@ public class TitForTat implements Strategy {
         return "TitForTat";
     }
 
+    @Override
+    public boolean equals(Object other) { return other instanceof TitForTat; }
 
-    private static class TitForTatPlayer implements  Player {
+
+    private static class TitForTatPlayer implements Player {
 
         private Move lastMoveOfOpponent;
 
@@ -27,7 +30,6 @@ public class TitForTat implements Strategy {
         public void setOpponentsMove(Move m) {
             lastMoveOfOpponent = m;
         }
-
     }
 
 }

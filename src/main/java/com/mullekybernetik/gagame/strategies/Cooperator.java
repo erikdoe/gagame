@@ -20,4 +20,6 @@ public class Cooperator implements Strategy, Player {
         return "Cooperator";
     }
 
+    @Override
+    public boolean equals(Object other) { return other instanceof Cooperator; }
 }

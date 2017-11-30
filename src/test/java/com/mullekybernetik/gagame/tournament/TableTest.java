@@ -1,10 +1,6 @@
 package com.mullekybernetik.gagame.tournament;
 
-import com.mullekybernetik.gagame.strategies.Strategy;
-import com.mullekybernetik.gagame.strategies.Cooperator;
-import com.mullekybernetik.gagame.strategies.Defector;
-import com.mullekybernetik.gagame.strategies.RandomChoice;
-import com.mullekybernetik.gagame.strategies.TitForTat;
+import com.mullekybernetik.gagame.strategies.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,7 +15,7 @@ public class TableTest {
 
     private Strategy defector;
     private Strategy cooperator;
-    private Strategy random;
+    private Strategy conditional;
     private Strategy titForTat;
     private Table table;
 
@@ -27,9 +23,9 @@ public class TableTest {
     public void setUp() {
         defector = new Defector();
         cooperator = new Cooperator();
-        random = new RandomChoice();
+        conditional = new ConditionalDefector("");
         titForTat = new TitForTat();
-        table = new Table(new Strategy[]{cooperator, defector, random, titForTat, random}, new int[]{2, 6, 4, 5, 4});
+        table = new Table(new Strategy[]{cooperator, defector, conditional, titForTat, conditional}, new int[]{2, 6, 4, 5, 4});
     }
 
     @Test
@@ -59,7 +55,7 @@ public class TableTest {
         List<Strategy> winners = getStrategies(result);
         assertEquals("Defector should be the winner", defector, winners.get(0));
         assertEquals("Tit-for-tat should be runner-up", titForTat, winners.get(1));
-        assertEquals("Random should be third", random, winners.get(2));
+        assertEquals("Random should be third", conditional, winners.get(2));
     }
 
     private List<Strategy> getStrategies(Collection<TableEntry> entries) {

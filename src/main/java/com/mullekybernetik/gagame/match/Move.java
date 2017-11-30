@@ -4,14 +4,29 @@ public final class Move {
 
     public static final Move DEFECT = new Move(0);
     public static final Move COOPERATE = new Move(1);
+    public static final Move UNKNOWN = new Move(2);
+
+    private static final String[] STRINGS = new String[] { "D", "C", "U" };
 
     private int value;
+
+
+    public static Move fromChar(char s) {
+        if (s == 'D') {
+            return Move.DEFECT;
+        } else if (s == 'C') {
+            return Move.COOPERATE;
+        } else {
+            return Move.UNKNOWN;
+        }
+    }
+
 
     private Move(int value) {
         this.value = value;
     }
 
-    private int getValue() {
+    public int getValue() {
         return value;
     }
 
@@ -26,7 +41,7 @@ public final class Move {
     }
 
     public String toString() {
-        return (value == 0) ? "D" : "C";
+        return STRINGS[value];
     }
 
 }
