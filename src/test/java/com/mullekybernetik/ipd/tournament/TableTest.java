@@ -4,7 +4,7 @@ import com.mullekybernetik.ipd.strategies.*;
 import com.mullekybernetik.ipd.strategies.basic.Cooperator;
 import com.mullekybernetik.ipd.strategies.basic.Defector;
 import com.mullekybernetik.ipd.strategies.basic.TitForTat;
-import com.mullekybernetik.ipd.strategies.encoded.ConditionalDefector;
+import com.mullekybernetik.ipd.strategies.encoded.ConditionalCooperator;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,7 +27,7 @@ public class TableTest {
     public void setUp() {
         defector = new Defector();
         cooperator = new Cooperator();
-        conditional = new ConditionalDefector("");
+        conditional = new ConditionalCooperator("");
         titForTat = new TitForTat();
         table = new Table(new Strategy[]{cooperator, defector, conditional, titForTat, conditional}, new int[]{2, 6, 4, 5, 4});
     }
