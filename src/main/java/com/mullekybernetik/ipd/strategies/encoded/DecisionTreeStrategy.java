@@ -4,23 +4,61 @@ import com.mullekybernetik.ipd.match.Move;
 import com.mullekybernetik.ipd.strategies.Player;
 import com.mullekybernetik.ipd.strategies.Strategy;
 
+/*
+
+    The strategy is encoded as a decision tree, e.g.
+
+        C     D     D     D
+           C           D
+                 C
+
+     - If the last move was cooperate, go left
+     - If the last move was defect, go right
+     - If the last move is not available or tree ends, use value at node
+
+     The nodes are encoded sequentially by level, e.g.
+
+        3     4     5     6
+           1           2
+                 0
+
+ */
+
 public class DecisionTreeStrategy implements Strategy {
 
-    private String stringRepresentation;
-    private int strategy;
-    private int depth;
+    private final String stringRepresentation;
+    private final String niceStringRepresentation;
+    private final int strategy;
+    private final int depth;
 
     public DecisionTreeStrategy(String stringRepresentation) {
         this.stringRepresentation = stringRepresentation;
+        this.niceStringRepresentation = beautifyStringRepresentation(stringRepresentation);
         this.strategy = calcNumericalRepresentation(stringRepresentation);
         this.depth = calcDepth(stringRepresentation.length());
+    }
+
+    private static String beautifyStringRepresentation(String original) {
+        String beautified = "";
+        int j = 0;
+        int bs = 1;
+        for(int i = 0; i < original.length(); i++) {
+            beautified += original.charAt(i) == 'C' ? '+' : '-'; //            '\u25CF' : '\u25CB';
+            j += 1;
+            if ((j % bs == 0) && (i != original.length() - 1)) {
+                beautified += "/";
+                j = 0;
+                bs <<= 1;
+            }
+        }
+        return beautified;
     }
 
     private static int calcNumericalRepresentation(String stringRepresentation) {
         int numericalRepresentation = 0;
         for (int i = stringRepresentation.length() - 1; i >= 0; i--) {
             numericalRepresentation <<= 1;
-            numericalRepresentation |= (stringRepresentation.charAt(i) == '+') ? 1 : 0;
+            numericalRepresentation |= (stringRepresentation.charAt(i) == 'C') ? 1 : 0;
         }
         return numericalRepresentation;
     }
@@ -37,6 +75,10 @@ public class DecisionTreeStrategy implements Strategy {
         return depth;
     }
 
+    public String getStringRepresentation() {
+        return stringRepresentation;
+    }
+
     protected int getNumericalRepresentation() {
         return strategy;
     }
@@ -45,26 +87,14 @@ public class DecisionTreeStrategy implements Strategy {
         return depth;
     }
 
+    @Override
     public Player instantiate() {
         return new PlayerImpl();
     }
 
     @Override
     public String toString() {
-        String s = "";
-        int j = 0;
-        int bs = 1;
-        for(int i = 0; i < stringRepresentation.length(); i++) {
-            s += stringRepresentation.charAt(i) == '+' ? '\u25CF' : '\u25CB';
-            j += 1;
-            if ((j % bs == 0) && (i != stringRepresentation.length() - 1)) {
-                s += "-";
-                j = 0;
-                bs <<= 1;
-            }
-        }
-
-        return s;
+        return niceStringRepresentation;
     }
 
     @Override
@@ -76,23 +106,25 @@ public class DecisionTreeStrategy implements Strategy {
 
     protected class PlayerImpl implements Player {
 
-        private int mdepth;
+        private int mcount;
         private int memory;
 
+        @Override
         public Move getMove() {
-            int shift = (1 << mdepth) - 1;
-            int mask = (1 << (1 << mdepth)) - 1;
+            int shift = (1 << mcount) - 1;
+            int mask = (1 << (1 << mcount)) - 1;
 
             int block = (strategy >> shift) & mask;
             int r = block & (1 << memory);
 
-            if (mdepth < depth) {
-                mdepth += 1;
+            if (mcount < depth) {
+                mcount += 1;
             }
 
             return (r != 0) ? Move.COOPERATE : Move.DEFECT;
         }
 
+        @Override
         public void setOpponentsMove(Move m) {
             memory <<= 1;
 

@@ -4,14 +4,14 @@ import com.mullekybernetik.ipd.strategies.Player;
 
 public class Match {
 
-    public static final int POINTS_FOR_SUCCESSFUL_BETRAYAL = 3;
-    public static final int POINTS_FOR_SUCCESSFUL_COOPERATION = 2;
+    public static final int POINTS_FOR_SUCCESSFUL_BETRAYAL = 5;
+    public static final int POINTS_FOR_SUCCESSFUL_COOPERATION = 3;
     public static final int POINTS_FOR_MUTUAL_BETRAYAL = 1;
     public static final int POINTS_FOR_UNSUCCESSFUL_COOPERATION = 0;
 
     private final Player a;
     private final Player b;
-    private Score score;
+    private final Score score;
 
     public Match(Player a, Player b) {
         this.a = a;
@@ -19,7 +19,14 @@ public class Match {
         this.score = new Score();
     }
 
-    public void playRound() {
+    public Score playGame(int rounds) {
+        for (int i = 0; i < rounds; i++) {
+            playRound();
+        }
+        return score;
+    }
+
+    protected void playRound() {
         Move moveA = a.getMove();
         Move moveB = b.getMove();
         a.setOpponentsMove(moveB);

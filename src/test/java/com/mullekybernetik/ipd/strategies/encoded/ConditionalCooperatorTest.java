@@ -9,13 +9,13 @@ import static org.junit.Assert.assertEquals;
 public class ConditionalCooperatorTest {
 
     @Test
-    public void shouldDefectWhenNoConditionsAreGiven() {
+    public void shouldCooperateWhenEmptyConditionIsGiven() {
 
         Player player = new ConditionalCooperator("").instantiate();
 
         Move move = player.getMove();
 
-        assertEquals("Should have returned expected move", Move.DEFECT, move);
+        assertEquals(Move.COOPERATE, move);
     }
 
     @Test
@@ -25,17 +25,17 @@ public class ConditionalCooperatorTest {
 
         Move move = player.getMove();
 
-        assertEquals("Should have returned expected move", Move.DEFECT, move);
+        assertEquals(Move.DEFECT, move);
     }
 
     @Test
     public void shouldCooperateWhenConditionsCheckForNoMoveAndNoMoveGiven() {
 
-        Player player = new ConditionalCooperator("U").instantiate();
+        Player player = new ConditionalCooperator("N").instantiate();
 
         Move move = player.getMove();
 
-        assertEquals("Should have returned expected move", Move.COOPERATE, move);
+        assertEquals(Move.COOPERATE, move);
     }
 
     @Test
@@ -47,7 +47,7 @@ public class ConditionalCooperatorTest {
         player.setOpponentsMove(Move.DEFECT);
         Move move = player.getMove();
 
-        assertEquals("Should have returned expected move", Move.COOPERATE, move);
+        assertEquals(Move.COOPERATE, move);
     }
 
 
@@ -60,17 +60,17 @@ public class ConditionalCooperatorTest {
         player.setOpponentsMove(Move.DEFECT);
         Move move = player.getMove();
 
-        assertEquals("Should have returned expected move", Move.DEFECT, move);
+        assertEquals(Move.DEFECT, move);
     }
 
     @Test
-    public void shouldDefectWhenConditionIsAnyButNoMovesKnown() {
+    public void shouldDefectWhenConditionIsAnyMoveButNoMovesAvailable() {
 
         Player player = new ConditionalCooperator("?").instantiate();
 
         Move move = player.getMove();
 
-        assertEquals("Should have returned expected move", Move.DEFECT, move);
+        assertEquals(Move.DEFECT, move);
     }
 
     @Test
@@ -84,7 +84,19 @@ public class ConditionalCooperatorTest {
         player.setOpponentsMove(Move.COOPERATE);
         Move move = player.getMove();
 
-        assertEquals("Should have returned expected move", Move.COOPERATE, move);
+        assertEquals(Move.COOPERATE, move);
+    }
+
+    @Test
+    public void shouldCooperateWhenConditionChecksForNoMoveAvailableAndGivenMove() {
+
+        Player player = new ConditionalCooperator("ND").instantiate();
+
+        player.getMove();
+        player.setOpponentsMove(Move.DEFECT);
+        Move move = player.getMove();
+
+        assertEquals(Move.COOPERATE, move);
     }
 
     @Test
@@ -98,11 +110,11 @@ public class ConditionalCooperatorTest {
         player.setOpponentsMove(Move.DEFECT);
         Move move = player.getMove();
 
-        assertEquals("Should have returned expected move", Move.DEFECT, move);
+        assertEquals(Move.DEFECT, move);
     }
 
     @Test
-    public void shouldCooperateWhenConditionHasQuestionMarksMatchingDefectAndCooperate() {
+    public void shouldCooperateWhenConditionHasAnyMovesMatchingDefectAndCooperate() {
 
         Player player = new ConditionalCooperator("C??").instantiate();
 
@@ -114,18 +126,34 @@ public class ConditionalCooperatorTest {
         player.setOpponentsMove(Move.COOPERATE);
         Move move = player.getMove();
 
-        assertEquals("Should have returned expected move", Move.COOPERATE, move);
+        assertEquals(Move.COOPERATE, move);
+    }
+
+    @Test
+    public void shouldCooperateWhenConditionHasHashMatchingNoMoveAndMove() {
+
+        Player player = new ConditionalCooperator("###C").instantiate();
+
+        player.setOpponentsMove(Move.COOPERATE);
+        player.getMove();
+        player.setOpponentsMove(Move.DEFECT);
+        player.getMove();
+        player.setOpponentsMove(Move.COOPERATE);
+        Move move = player.getMove();
+
+        assertEquals(Move.COOPERATE, move);
     }
 
     @Test
     public void shouldAlsoEvaluateSecondBlock() {
 
-        Player player = new ConditionalCooperator("CD-UUC").instantiate();
+        Player player = new ConditionalCooperator("CD-NNC").instantiate();
 
         player.getMove();
         player.setOpponentsMove(Move.COOPERATE);
         Move move = player.getMove();
 
-        assertEquals("Should have returned expected move", Move.COOPERATE, move);
+        assertEquals(Move.COOPERATE, move);
     }
+
 }

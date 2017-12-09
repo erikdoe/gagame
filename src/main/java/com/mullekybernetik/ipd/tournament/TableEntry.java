@@ -20,6 +20,7 @@ public class TableEntry implements Comparable<TableEntry> {
             return points;
         }
 
+    @Override
     public int compareTo(TableEntry other) {
         return (other.points - this.points);  // order descending
     }

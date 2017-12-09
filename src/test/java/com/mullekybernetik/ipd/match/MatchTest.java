@@ -1,8 +1,8 @@
 package com.mullekybernetik.ipd.match;
 
+import com.mullekybernetik.ipd.strategies.Player;
 import com.mullekybernetik.ipd.strategies.basic.Cooperator;
 import com.mullekybernetik.ipd.strategies.basic.Defector;
-import com.mullekybernetik.ipd.strategies.Player;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -15,15 +15,16 @@ public class MatchTest {
     @Test
     public void shouldProvidePlayersWithResultsForSingleRound() {
         Player alice = mock(Player.class);
-        when(alice.getMove()).thenReturn(Move.DEFECT);
+        when(alice.getMove()).thenReturn(Move.COOPERATE);
+
         Player bob = mock(Player.class);
-        when(bob.getMove()).thenReturn(Move.COOPERATE);
+        when(bob.getMove()).thenReturn(Move.DEFECT);
 
         Match match = new Match(alice, bob);
         match.playRound();
 
-        verify(alice).setOpponentsMove(Move.COOPERATE);
-        verify(bob).setOpponentsMove(Move.DEFECT);
+        verify(alice).setOpponentsMove(Move.DEFECT);
+        verify(bob).setOpponentsMove(Move.COOPERATE);
     }
 
     @Test
@@ -64,6 +65,15 @@ public class MatchTest {
 
         Assert.assertEquals(POINTS_FOR_MUTUAL_BETRAYAL, score.a);
         Assert.assertEquals(POINTS_FOR_MUTUAL_BETRAYAL, score.b);
+    }
+
+    @Test
+    public void shouldRunMultipleRoundsAndReturnScore() {
+        Match match = new Match(new Cooperator(), new Defector());
+        Score score = match.playGame(2);
+
+        Assert.assertEquals("Should have right number of points for cooperator", 0, score.a);
+        Assert.assertEquals("Should have right number of points for defector", 2 * POINTS_FOR_SUCCESSFUL_BETRAYAL, score.b);
     }
 
 }

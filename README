@@ -1,4 +1,0 @@
-A game pitting different strategies for the Prisoner's Dilemma[1] against each other. The plan is to search for the best strategy (for a given set of world parameters) using a genetic algorithm[2].
-
-[1] http://en.wikipedia.org/wiki/Prisoner%27s_dilemma
-[2] http://en.wikipedia.org/wiki/Genetic_algorithm 

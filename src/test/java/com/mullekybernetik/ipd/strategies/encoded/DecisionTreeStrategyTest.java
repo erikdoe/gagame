@@ -10,15 +10,15 @@ public class DecisionTreeStrategyTest {
     @Test
     public void shouldCreateNumericalEncodingFromString() {
 
-        DecisionTreeStrategy strategy = new DecisionTreeStrategy("--+---+");
+        DecisionTreeStrategy strategy = new DecisionTreeStrategy("DDCDDDC");
         int numericalRepresentation = strategy.getNumericalRepresentation();
-        assertEquals("Number should have used bits in reverse order", 68, numericalRepresentation);
+        assertEquals("Number should have used bits in reverse order", 0x44, numericalRepresentation);
     }
 
     @Test
     public void shouldCalculateStrategyDepth() {
 
-        DecisionTreeStrategy strategy = new DecisionTreeStrategy("+-+---+-------+");
+        DecisionTreeStrategy strategy = new DecisionTreeStrategy("CDCDDDCDDDDDDDC");
         int depth = strategy.getDepth();
         assertEquals("Depth should be log(x) of longest block", 3, depth);
     }
@@ -26,7 +26,7 @@ public class DecisionTreeStrategyTest {
     @Test
     public void playerShouldRepresentMovesAsBitsInMemory() {
 
-        DecisionTreeStrategy strategy = new DecisionTreeStrategy("+-+---+-------+");
+        DecisionTreeStrategy strategy = new DecisionTreeStrategy("CDCDDDCDDDDDDDC");
         DecisionTreeStrategy.PlayerImpl player = (DecisionTreeStrategy.PlayerImpl) strategy.instantiate();
         player.setOpponentsMove(Move.COOPERATE);
         player.setOpponentsMove(Move.COOPERATE);
@@ -34,13 +34,13 @@ public class DecisionTreeStrategyTest {
 
         int memory = player.getMemory();
 
-        assertEquals("Correct bits should be set", 6, memory);
+        assertEquals(0b110, memory);
     }
 
     @Test
     public void playerShouldCapMemoryAtDepth() {
 
-        DecisionTreeStrategy strategy = new DecisionTreeStrategy("+-+---+");
+        DecisionTreeStrategy strategy = new DecisionTreeStrategy("CDCDDDC");
         DecisionTreeStrategy.PlayerImpl player = (DecisionTreeStrategy.PlayerImpl) strategy.instantiate();
         player.setOpponentsMove(Move.COOPERATE);
         player.setOpponentsMove(Move.COOPERATE);
@@ -48,46 +48,46 @@ public class DecisionTreeStrategyTest {
 
         int memory = player.getMemory();
 
-        assertEquals("Correct bits should be set", 2, memory);
+        assertEquals(0b10, memory);
     }
 
     @Test
     public void playerShouldUseLowestBitToDetermineInitialMove() {
-        DecisionTreeStrategy strategy = new DecisionTreeStrategy("+--");
+        DecisionTreeStrategy strategy = new DecisionTreeStrategy("CDD");
         DecisionTreeStrategy.PlayerImpl player = (DecisionTreeStrategy.PlayerImpl) strategy.instantiate();
 
         Move move = player.getMove();
 
-        assertEquals("Should have used lowest bit", Move.COOPERATE, move);
+        assertEquals(Move.COOPERATE, move);
     }
 
     @Test
     public void playerShouldUseLowestBitInSecondBlockToDetermineResponseToDefect() {
-        DecisionTreeStrategy strategy = new DecisionTreeStrategy("-+-");
+        DecisionTreeStrategy strategy = new DecisionTreeStrategy("DCD");
         DecisionTreeStrategy.PlayerImpl player = (DecisionTreeStrategy.PlayerImpl) strategy.instantiate();
 
         player.getMove();
         player.setOpponentsMove(Move.DEFECT);
         Move move = player.getMove();
 
-        assertEquals("Should have used lowest bit in second block", Move.COOPERATE, move);
+        assertEquals(Move.COOPERATE, move);
     }
 
     @Test
     public void playerShouldOnlyConsiderCorrectBitWhenDeterminingResponse() {
-        DecisionTreeStrategy strategy = new DecisionTreeStrategy("+-+");
+        DecisionTreeStrategy strategy = new DecisionTreeStrategy("CDC");
         DecisionTreeStrategy.PlayerImpl player = (DecisionTreeStrategy.PlayerImpl) strategy.instantiate();
 
         player.getMove();
         player.setOpponentsMove(Move.DEFECT);
         Move move = player.getMove();
 
-        assertEquals("Should have used lowest bit in second block", Move.DEFECT, move);
+        assertEquals(Move.DEFECT, move);
     }
 
     @Test
     public void playerShouldUseCorrectBitInThirdBlockToDetermineResponse() {
-        DecisionTreeStrategy strategy = new DecisionTreeStrategy("----+--");
+        DecisionTreeStrategy strategy = new DecisionTreeStrategy("DDDDCDD");
         DecisionTreeStrategy.PlayerImpl player = (DecisionTreeStrategy.PlayerImpl) strategy.instantiate();
 
         player.getMove();
@@ -96,12 +96,12 @@ public class DecisionTreeStrategyTest {
         player.setOpponentsMove(Move.COOPERATE);
         Move move = player.getMove();
 
-        assertEquals("Should have used correct bit in third block", Move.COOPERATE, move);
+        assertEquals(Move.COOPERATE, move);
     }
 
     @Test
     public void playerShouldIgnoreMovesBeyondDepthOfStrategy() {
-        DecisionTreeStrategy strategy = new DecisionTreeStrategy("----+--");
+        DecisionTreeStrategy strategy = new DecisionTreeStrategy("DDDDCDD");
         DecisionTreeStrategy.PlayerImpl player = (DecisionTreeStrategy.PlayerImpl) strategy.instantiate();
 
         player.getMove();
@@ -112,7 +112,7 @@ public class DecisionTreeStrategyTest {
         player.setOpponentsMove(Move.COOPERATE);
         Move move = player.getMove();
 
-        assertEquals("At depth 2 the result for CDC should be the same as for DC", Move.COOPERATE, move);
+        assertEquals(Move.COOPERATE, move);
     }
 
 }

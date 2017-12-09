@@ -1,11 +1,8 @@
 package com.mullekybernetik.ipd.tournament;
 
-import com.mullekybernetik.ipd.match.MatchRunner;
-import com.mullekybernetik.ipd.match.Score;
 import com.mullekybernetik.ipd.strategies.basic.Cooperator;
 import com.mullekybernetik.ipd.strategies.basic.Defector;
 import com.mullekybernetik.ipd.strategies.Strategy;
-import com.mullekybernetik.ipd.strategies.basic.TitForTat;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -17,31 +14,14 @@ import static com.mullekybernetik.ipd.match.Match.POINTS_FOR_UNSUCCESSFUL_COOPER
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.*;
 
 public class TournamentTest {
 
     @Test
-    public void shouldRunMatchesForAllPairingsWithRightNumberOfRounds() {
-
-        MatchRunner runner = mock(MatchRunner.class);
-        Tournament tournament = new Tournament(runner, new AllPairingsFactory());
-        List<Strategy> strategies = Arrays.asList(new Cooperator(), new Defector(), new TitForTat());
-        when(runner.runMatch(any(Strategy.class), any(Strategy.class), anyInt())).thenReturn(new Score());
-
-        tournament.runTournament(strategies, 5);
-
-        verify(runner).runMatch(eq(strategies.get(0)), eq(strategies.get(1)), eq(5));
-        verify(runner).runMatch(eq(strategies.get(0)), eq(strategies.get(2)), eq(5));
-        verify(runner).runMatch(eq(strategies.get(1)), eq(strategies.get(2)), eq(5));
-    }
-
-    @Test
     public void shouldAddPointsForMatches() {
 
-        Tournament tournament = new Tournament(new MatchRunner(), new AllPairingsFactory());
+        Tournament tournament = new Tournament(new AllPairingsFactory());
         List<Strategy> strategies = Arrays.asList(new Cooperator(), new Defector());
 
         Table table = tournament.runTournament(strategies, 1);

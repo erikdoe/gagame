@@ -6,15 +6,9 @@ import com.mullekybernetik.ipd.strategies.Strategy;
 
 public class Defector implements Strategy, Player {
 
+    @Override
     public Player instantiate() {
         return this;
-    }
-
-    public Move getMove() {
-        return Move.DEFECT;
-    }
-
-    public void setOpponentsMove(Move m) {
     }
 
     @Override
@@ -24,5 +18,14 @@ public class Defector implements Strategy, Player {
 
     @Override
     public boolean equals(Object other) { return other instanceof Defector; }
+
+    @Override
+    public Move getMove() {
+        return Move.DEFECT;
+    }
+
+    @Override
+    public void setOpponentsMove(Move m) {
+    }
 
 }

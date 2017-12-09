@@ -7,7 +7,7 @@ import java.util.List;
 
 public class AllPairingsFactory implements PairingFactory {
 
-    List<Pairing> pairings;
+    private List<Pairing> pairings;
 
     @Override
     public List<Pairing> getPairingsForStrategies(List<Strategy> strategies) {

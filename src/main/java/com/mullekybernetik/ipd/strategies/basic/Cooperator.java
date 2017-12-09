@@ -6,15 +6,9 @@ import com.mullekybernetik.ipd.strategies.Strategy;
 
 public class Cooperator implements Strategy, Player {
 
+    @Override
     public Player instantiate() {
         return this;
-    }
-
-    public Move getMove() {
-        return Move.COOPERATE;
-    }
-
-    public void setOpponentsMove(Move m) {
     }
 
     @Override
@@ -24,4 +18,14 @@ public class Cooperator implements Strategy, Player {
 
     @Override
     public boolean equals(Object other) { return other instanceof Cooperator; }
+
+    @Override
+    public Move getMove() {
+        return Move.COOPERATE;
+    }
+
+    @Override
+    public void setOpponentsMove(Move m) {
+    }
+
 }

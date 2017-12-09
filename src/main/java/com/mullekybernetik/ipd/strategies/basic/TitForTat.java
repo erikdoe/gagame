@@ -6,6 +6,7 @@ import com.mullekybernetik.ipd.strategies.Strategy;
 
 public class TitForTat implements Strategy {
 
+    @Override
     public Player instantiate() {
         return new TitForTatPlayer();
     }
@@ -23,12 +24,14 @@ public class TitForTat implements Strategy {
 
         private Move lastMoveOfOpponent;
 
+        @Override
         public Move getMove() {
             if (lastMoveOfOpponent == null)
                 return Move.COOPERATE;
             return lastMoveOfOpponent;
         }
 
+        @Override
         public void setOpponentsMove(Move m) {
             lastMoveOfOpponent = m;
         }

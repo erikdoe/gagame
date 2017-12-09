@@ -7,15 +7,15 @@ import com.mullekybernetik.ipd.strategies.Strategy;
 
 public class ConditionalCooperator implements Strategy {
 
-    private String stringRepresentation;
-    private Condition[] conditions;
+    private final String stringRepresentation;
+    private final Condition[] conditions;
 
     public ConditionalCooperator(String stringRepresentation) {
         this.stringRepresentation = stringRepresentation;
-        this.conditions = stringRepresentation.isEmpty() ? new Condition[0] : parseConditionBlocks(stringRepresentation.split("-"));
+        this.conditions = parseConditionBlocks(stringRepresentation.split("-"));
     }
 
-    private Condition[] parseConditionBlocks(String[] blocks) {
+    private static Condition[] parseConditionBlocks(String[] blocks) {
         Condition[] conditions = new Condition[blocks.length];
         for (int i = 0; i < blocks.length; i++) {
             conditions[i] = parseBlock(blocks[i]);
@@ -23,21 +23,25 @@ public class ConditionalCooperator implements Strategy {
         return conditions;
     }
 
-    private Condition parseBlock(String block) {
+    private static Condition parseBlock(String block) {
         int pattern = 0;
         int mask = 0;
         for (int i = 0; i < block.length(); i++) {
             pattern <<= 2;
             mask <<= 2;
-            char c = block.charAt(i);
-            if (c == '?') {
-                mask |= 0x2; // here we are breaking encapsulation; we assume U is in bit 2 and CD are in bit 1
-            } else {
-                pattern |= Move.fromChar(c).getValue();
-                mask |= 0x3;
+            switch (block.charAt(i)) {
+                case '#':                              break;
+                case '?': mask |= 0x2;                 break;
+                case 'N': mask |= 0x3; pattern |= 0x2; break;
+                case 'C': mask |= 0x3; pattern |= 0x1; break;
+                case 'D': mask |= 0x3;                 break;
             }
         }
         return new Condition(pattern, mask);
+    }
+
+    public String getStringRepresentation() {
+        return stringRepresentation;
     }
 
     @Override
@@ -57,7 +61,7 @@ public class ConditionalCooperator implements Strategy {
     }
 
 
-    private static class Condition {
+    private static final class Condition {
         private int pattern;
         private int mask;
 
@@ -70,14 +74,7 @@ public class ConditionalCooperator implements Strategy {
 
     protected class PlayerImpl implements Player {
 
-        private int memory;
-
-        protected PlayerImpl() {
-            for (int i = 0; i < 16; i++) {
-                memory <<= 2;
-                memory |= Move.UNKNOWN.getValue();
-            }
-        }
+        private int memory = 0xAAAAA; // 0xA = 1010, and 10 is the pattern for move not available
 
         @Override
         public Move getMove() {
@@ -92,7 +89,7 @@ public class ConditionalCooperator implements Strategy {
         @Override
         public void setOpponentsMove(Move m) {
             memory <<= 2;
-            memory |= m.getValue();
+            memory |= ((m == Move.COOPERATE) ? 1 : 0);
         }
 
     }
