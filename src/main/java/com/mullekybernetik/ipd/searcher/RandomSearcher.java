@@ -8,7 +8,6 @@ import com.mullekybernetik.ipd.strategies.basic.Defector;
 import com.mullekybernetik.ipd.strategies.basic.TitForTat;
 import com.mullekybernetik.ipd.strategies.encoded.ConditionalCooperatorFactory;
 import com.mullekybernetik.ipd.tournament.Table;
-import com.mullekybernetik.ipd.tournament.TableEntry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +32,7 @@ public class RandomSearcher implements Searcher {
     @Override
     public List<Strategy> createNextPopulation(int populationSize, Table result) {
         List<Strategy> strategies = new ArrayList<>();
-        for (TableEntry e : result.getTopEntries(populationSize * SURVIVOR_PERCENTAGE/100)) {
+        for (Table.Entry e : result.getTopEntries(populationSize * SURVIVOR_PERCENTAGE/100)) {
             strategies.add(e.getStrategy());
         }
         fillWithNewRandomStrategies(strategies, populationSize);

@@ -12,7 +12,11 @@ public class ConditionalCooperatorFactory implements StrategyFactory {
     private final StringGenerator generator;
 
     public ConditionalCooperatorFactory() {
-        this.random = new Random();
+        this(new Random());
+    }
+
+    public ConditionalCooperatorFactory(Random random) {
+        this.random = random;
         this.generator = new StringGenerator("DCN?");
     }
 
@@ -57,8 +61,20 @@ public class ConditionalCooperatorFactory implements StrategyFactory {
     }
 
     @Override
-    public Strategy recombine(Strategy a, Strategy b) {
-        return null;
+    public <T extends Strategy> T recombine(T a, T b) {
+
+        String aStringRep = ((ConditionalCooperator)a).getStringRepresentation();
+        String bStringRep = ((ConditionalCooperator)b).getStringRepresentation();
+
+        if (random.nextBoolean()) {
+            String temp = aStringRep;
+            aStringRep = bStringRep;
+            bStringRep = temp;
+        }
+        int xp = random.nextInt(Math.min(aStringRep.length(), bStringRep.length()) + 1);
+        String cStringRep = aStringRep.substring(0, xp) + bStringRep.substring(xp, bStringRep.length());
+
+        return (T)new ConditionalCooperator(cStringRep);
     }
 
 }

@@ -3,26 +3,25 @@ package com.mullekybernetik.ipd.searcher;
 import com.mullekybernetik.ipd.Searcher;
 import com.mullekybernetik.ipd.strategies.Strategy;
 import com.mullekybernetik.ipd.strategies.StrategyFactory;
-import com.mullekybernetik.ipd.strategies.basic.Cooperator;
-import com.mullekybernetik.ipd.strategies.basic.Defector;
-import com.mullekybernetik.ipd.strategies.basic.TitForTat;
+import com.mullekybernetik.ipd.strategies.basic.*;
+import com.mullekybernetik.ipd.strategies.encoded.ConditionalCooperator;
+import com.mullekybernetik.ipd.strategies.encoded.ConditionalCooperatorFactory;
 import com.mullekybernetik.ipd.strategies.encoded.DecisionTreeStrategy;
 import com.mullekybernetik.ipd.strategies.encoded.DecisionTreeStrategyFactory;
 import com.mullekybernetik.ipd.tournament.Table;
-import com.mullekybernetik.ipd.tournament.TableEntry;
 
 import java.util.*;
 
 public class GeneticSearcher implements Searcher {
 
-    private static final int STRATEGY_DEPTH = 4;
+    private static final int STRATEGY_DEPTH = 3;
 
     private final Random random;
     private StrategyFactory factory;
 
     public GeneticSearcher() {
         this.random = new Random();
-        this.factory = new DecisionTreeStrategyFactory();
+        this.factory = new ConditionalCooperatorFactory();
     }
 
     @Override
@@ -32,6 +31,8 @@ public class GeneticSearcher implements Searcher {
             strategies.add(new Cooperator());
             strategies.add(new Defector());
             strategies.add(new TitForTat());
+            strategies.add(new Grudger());
+            strategies.add(new Detective());
         }
         fillWithNewRandomStrategies(strategies, populationSize);
         return strategies;
@@ -42,7 +43,7 @@ public class GeneticSearcher implements Searcher {
         List<Strategy> population = new ArrayList<>();
         Map<Class, List<Strategy>> strategyBuckets = new HashMap<>();
 
-        for (TableEntry e : result.getTopEntries(populationSize * 2 / 3 - 5)) { // remaining 1/3 will be offspring
+        for (Table.Entry e : result.getTopEntries(populationSize * 2 / 3 - 5)) { // remaining 1/3 will be offspring
             Strategy strategy = e.getStrategy();
             List<Strategy> bucket = strategyBuckets.computeIfAbsent(strategy.getClass(), k -> new ArrayList<>());
             bucket.add(strategy);
@@ -50,7 +51,7 @@ public class GeneticSearcher implements Searcher {
 
         for (Class c : strategyBuckets.keySet()) {
             List<Strategy> bucket = strategyBuckets.get(c);
-            if (bucket.get(0) instanceof DecisionTreeStrategy) {
+            if (bucket.get(0) instanceof ConditionalCooperator) {
                 population.addAll(bucket);
                 addOffspring(population, bucket);
             } else {

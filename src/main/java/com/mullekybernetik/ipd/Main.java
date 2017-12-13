@@ -4,7 +4,6 @@ import com.mullekybernetik.ipd.searcher.GeneticSearcher;
 import com.mullekybernetik.ipd.strategies.Strategy;
 import com.mullekybernetik.ipd.tournament.AllPairingsFactory;
 import com.mullekybernetik.ipd.tournament.Table;
-import com.mullekybernetik.ipd.tournament.TableEntry;
 import com.mullekybernetik.ipd.tournament.Tournament;
 
 import java.io.*;
@@ -38,53 +37,36 @@ public class Main {
                 Table result = tournament.runTournament(population, ROUNDS_PER_MATCH);
 
                 if ((i % 100 == 0) || (i == 1)) {
-                    if (logProgress(i, result)) {
+                    if ((double) result.getWinningStrategyCount() / POPULATION_SIZE > 0.95) {
                         earlyStopCounter += 1;
+                        writer.write(((earlyStopCounter == 5) || (i == 1)) ?
+                                "@" : String.format("%d", 5 - earlyStopCounter));
+                        writeResult(i, result);
                         if (earlyStopCounter == 5) {
                             break;
                         }
                     } else {
                         earlyStopCounter = 0;
+                        writer.write(" ");
+                        writeResult(i, result);
                     }
                 }
 
                 population = searcher.createNextPopulation(POPULATION_SIZE, result);
             }
 
-            writer.write("\n**** NEW TOURNAMENT ****\n\n");
+            writer.write("\n*** NEW TOURNAMENT ***\n\n");
         }
     }
 
-
-    private static boolean logProgress(int i, Table result) throws IOException {
-        List<TableEntry> allEntries = result.getAllEntries();
-
+    private static void writeResult(int i, Table results) throws IOException {
+        List<Table.EntryBucket> buckets = results.getEntryBuckets();
         writer.write(String.format("%6d; ", i));
-        TableEntry current = null;
-        int count = 0;
-        boolean isWinner = true;
-        int winnerCount = 0;
-        for (TableEntry e : allEntries) {
-            if (current == null) {
-                current = e;
-                count = 1;
-            } else if (!current.getStrategy().equals(e.getStrategy())) {
-                writer.write(String.format("(%3d, %-35s, %5d); ", count, current.getStrategy(), current.getPoints()));
-                current = e;
-                if (isWinner) {
-                    winnerCount += count;
-                }
-                isWinner = false;
-                count = 1;
-            } else {
-                count += 1;
-            }
+        for (Table.EntryBucket b : buckets) {
+            writer.write(String.format("(%3d, %-35s, %5d); ", b.getCount(), b.getEntry().getStrategy(), b.getEntry().getPoints()));
         }
-        writer.write(String.format("(%3d, %-35s, %5d); ", count, current.getStrategy(), current.getPoints()));
         writer.write("\n");
         writer.flush();
-
-        return (double)winnerCount / allEntries.size()  > 0.95;
     }
 
 }

@@ -8,7 +8,7 @@ public class TitForTat implements Strategy {
 
     @Override
     public Player instantiate() {
-        return new TitForTatPlayer();
+        return new PlayerImpl();
     }
 
     @Override
@@ -20,7 +20,7 @@ public class TitForTat implements Strategy {
     public boolean equals(Object other) { return other instanceof TitForTat; }
 
 
-    private static class TitForTatPlayer implements Player {
+    private static class PlayerImpl implements Player {
 
         private Move lastMoveOfOpponent;
 
