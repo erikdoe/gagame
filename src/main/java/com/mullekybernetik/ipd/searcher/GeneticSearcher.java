@@ -14,7 +14,7 @@ import java.util.*;
 
 public class GeneticSearcher implements Searcher {
 
-    private static final int STRATEGY_DEPTH = 3;
+    private static final int STRATEGY_DEPTH = 4; // TODO: parameters ara all over the place...
 
     private final Random random;
     private StrategyFactory factory;
@@ -51,7 +51,7 @@ public class GeneticSearcher implements Searcher {
 
         for (Class c : strategyBuckets.keySet()) {
             List<Strategy> bucket = strategyBuckets.get(c);
-            if (bucket.get(0) instanceof ConditionalCooperator) {
+            if (bucket.get(0) instanceof ConditionalCooperator) { // TODO: somehow should know class based on factory
                 population.addAll(bucket);
                 addOffspring(population, bucket);
             } else {

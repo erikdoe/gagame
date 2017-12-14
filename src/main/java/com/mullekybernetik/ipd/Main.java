@@ -20,6 +20,9 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
+        // TODO: check troughput
+        // System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "12");
+
         searcher = new GeneticSearcher();
         writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream("ipd-out.txt"), "utf-8"));

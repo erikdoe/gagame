@@ -34,7 +34,7 @@ public class ConditionalCooperatorFactory implements StrategyFactory {
         List<String> blocks = new ArrayList<>(nblocks);
         for (int i = 0; i < nblocks; i++) {
             String b = generator.randomString(random.nextInt(depth) + 1);
-            b = optimizeBlock(b);
+//            b = optimizeBlock(b);
             blocks.add(b);
         }
 //        blocks = optimizeStrategy(blocks);
