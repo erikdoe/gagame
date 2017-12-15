@@ -2,6 +2,7 @@ package com.mullekybernetik.ipd;
 
 import com.mullekybernetik.ipd.searcher.GeneticSearcher;
 import com.mullekybernetik.ipd.strategies.Strategy;
+import com.mullekybernetik.ipd.strategies.encoded.ConditionalCooperatorFactory;
 import com.mullekybernetik.ipd.tournament.AllPairingsFactory;
 import com.mullekybernetik.ipd.tournament.Table;
 import com.mullekybernetik.ipd.tournament.Tournament;
@@ -11,8 +12,8 @@ import java.util.*;
 
 public class Main {
 
-    private static final int POPULATION_SIZE = 500;
-    private static final int TOURNAMENTS_PER_SEARCH = 10_000;
+    private static final int POPULATION_SIZE = 1000;
+    private static final int TOURNAMENTS_PER_SEARCH = 5000;
     private static final int ROUNDS_PER_MATCH = 20;
 
     private static Searcher searcher;
@@ -20,10 +21,15 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        // TODO: check troughput
-        // System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "12");
+//        DecisionTreeStrategyFactory strategyFactory = new DecisionTreeStrategyFactory();
+//        strategyFactory.setDepth(4);
 
-        searcher = new GeneticSearcher();
+        ConditionalCooperatorFactory strategyFactory = new ConditionalCooperatorFactory();
+        strategyFactory.setDepth(3);
+        strategyFactory.setBlockCount(5);
+
+        searcher = new GeneticSearcher(strategyFactory);
+
         writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream("ipd-out.txt"), "utf-8"));
 
@@ -39,7 +45,7 @@ public class Main {
                 Tournament tournament = new Tournament(pairingFactory);
                 Table result = tournament.runTournament(population, ROUNDS_PER_MATCH);
 
-                if ((i % 100 == 0) || (i == 1)) {
+                if ((i % 50 == 0) || (i == 1)) {
                     if ((double) result.getWinningStrategyCount() / POPULATION_SIZE > 0.95) {
                         earlyStopCounter += 1;
                         writer.write(((earlyStopCounter == 5) || (i == 1)) ?

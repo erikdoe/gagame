@@ -9,7 +9,10 @@ import java.util.*;
 public class ConditionalCooperatorFactory implements StrategyFactory {
 
     private final Random random;
-    private final StringGenerator generator;
+    private final StringGenerator g0, g1, g2;
+
+    private int depth;
+    private int blockCount;
 
     public ConditionalCooperatorFactory() {
         this(new Random());
@@ -17,48 +20,44 @@ public class ConditionalCooperatorFactory implements StrategyFactory {
 
     public ConditionalCooperatorFactory(Random random) {
         this.random = random;
-        this.generator = new StringGenerator("DCN?");
+        this.g0 = new StringGenerator("DCN?");
+        this.g1 = new StringGenerator("DC?");
+        this.g2 = new StringGenerator("DC");
+    }
+
+    public void setDepth(int depth) {
+        this.depth = depth;
+    }
+
+    public void setBlockCount(int blockCount) {
+        this.blockCount = blockCount;
     }
 
     @Override
-    public Collection<Strategy> createRandomStrategies(int count, int depth) {
+    public Class getStrategyClass() {
+        return ConditionalCooperator.class;
+    }
+
+    @Override
+    public Collection<Strategy> getRandomStrategies(int count) {
         Collection<Strategy> strategies = new ArrayList<>(count);
         for (int i = 0; i < count; i++) {
-            strategies.add(createRandomStrategy(depth));
+            strategies.add(createRandomStrategy());
         }
         return strategies;
     }
 
-    private ConditionalCooperator createRandomStrategy(int depth) {
-        int nblocks = 5; // random.nextInt(5) + 1;
-        List<String> blocks = new ArrayList<>(nblocks);
-        for (int i = 0; i < nblocks; i++) {
-            String b = generator.randomString(random.nextInt(depth) + 1);
-//            b = optimizeBlock(b);
+    private ConditionalCooperator createRandomStrategy() {
+        List<String> blocks = new ArrayList<>(blockCount);
+        for (int i = 0; i < blockCount; i++) {
+            String b = g0.randomString(1) + g1.randomString(random.nextInt(depth - 1)) + g2.randomString(1);
+//            String b = g0.randomString(random.nextInt(depth) + 1);
             blocks.add(b);
         }
-//        blocks = optimizeStrategy(blocks);
         return new ConditionalCooperator(String.join("-", blocks));
     }
 
-    private static String optimizeBlock(String block) {
-        int uidx = block.lastIndexOf('N');
-        if (uidx > 0) {
-            block = block.substring(uidx, block.length());
-        }
-        return block;
-    }
 
-    private static List<String> optimizeStrategy(List<String> blockList) {
-        blockList.sort((block1, block2) -> {
-            int r = block1.length() - block2.length();
-            if (r != 0) {
-                return r;
-            }
-            return block1.compareTo(block2);
-        });
-        return blockList;
-    }
 
     @Override
     public <T extends Strategy> T recombine(T a, T b) {

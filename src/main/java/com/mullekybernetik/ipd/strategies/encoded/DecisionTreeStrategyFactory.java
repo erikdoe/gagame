@@ -13,6 +13,8 @@ public class DecisionTreeStrategyFactory implements StrategyFactory {
     private final Random random;
     private final StringGenerator generator;
 
+    private int depth;
+
     public DecisionTreeStrategyFactory() {
         this(new Random());
     }
@@ -22,8 +24,17 @@ public class DecisionTreeStrategyFactory implements StrategyFactory {
         this.generator = new StringGenerator("DC");
     }
 
+    public void setDepth(int depth) {
+        this.depth = depth;
+    }
+
     @Override
-    public Collection<Strategy> createRandomStrategies(int count, int depth) {
+    public Class getStrategyClass() {
+        return DecisionTreeStrategy.class;
+    }
+
+    @Override
+    public Collection<Strategy> getRandomStrategies(int count) {
         Collection<Strategy> strategies = new ArrayList<>(count);
         for (int i = 0; i < count; i++) {
             int size = (1 << depth + 1) - 1; //   (1 << (random.nextInt(depth) + 2)) - 1;
