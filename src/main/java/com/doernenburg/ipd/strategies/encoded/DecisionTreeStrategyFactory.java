@@ -10,22 +10,22 @@ import java.util.Random;
 
 public class DecisionTreeStrategyFactory implements StrategyFactory {
 
-    private final Random random;
     private final StringGenerator generator;
+    private final Random random;
+    private final int depth;
 
-    private int depth;
+    private DecisionTreeStrategyFactory(Random random, int depth) {
+        this.generator = new StringGenerator("DC");
+        this.random = random;
+        this.depth = depth;
+    }
 
-    public DecisionTreeStrategyFactory() {
-        this(new Random());
+    public DecisionTreeStrategyFactory(int depth) {
+        this(new Random(), depth);
     }
 
     public DecisionTreeStrategyFactory(Random random) {
-        this.random = random;
-        this.generator = new StringGenerator("DC");
-    }
-
-    public void setDepth(int depth) {
-        this.depth = depth;
+        this(random, 3);
     }
 
     @Override
@@ -35,9 +35,9 @@ public class DecisionTreeStrategyFactory implements StrategyFactory {
 
     @Override
     public Collection<Strategy> getRandomStrategies(int count) {
+        int size = (1 << depth + 1) - 1;
         Collection<Strategy> strategies = new ArrayList<>(count);
         for (int i = 0; i < count; i++) {
-            int size = (1 << depth + 1) - 1; //   (1 << (random.nextInt(depth) + 2)) - 1;
             strategies.add(new DecisionTreeStrategy(generator.randomString(size)));
         }
         return strategies;

@@ -12,14 +12,14 @@ public class AllPairingsFactory implements PairingFactory {
     @Override
     public List<Pairing> getPairingsForStrategies(List<Strategy> strategies) {
 
-        int s = strategies.size();
-        if ((pairings != null) && (pairings.size() == ((s*s)-s)/2)) {
+        int n = strategies.size();
+        if ((pairings != null) && (pairings.size() == ((n*n)+n)/2)) {
             return pairings;
         }
 
         pairings = new ArrayList<>();
-        for (int i = 0; i < strategies.size(); i++) {
-            for (int j = i + 1; j < strategies.size(); j++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
                 pairings.add(new Pairing(i, j));
             }
         }

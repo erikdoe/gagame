@@ -1,8 +1,9 @@
 package com.doernenburg.ipd;
 
 import com.doernenburg.ipd.searcher.GeneticSearcher;
+import com.doernenburg.ipd.searcher.Searcher;
 import com.doernenburg.ipd.strategies.Strategy;
-import com.doernenburg.ipd.strategies.encoded.ConditionalCooperatorFactory;
+import com.doernenburg.ipd.strategies.encoded.DecisionTreeStrategyFactory;
 import com.doernenburg.ipd.tournament.AllPairingsFactory;
 import com.doernenburg.ipd.tournament.PairingFactory;
 import com.doernenburg.ipd.tournament.Table;
@@ -14,82 +15,44 @@ import java.util.*;
 
 public class Main {
 
-    private static final int POPULATION_SIZE = 1000;
-    private static final int TOURNAMENTS_PER_SEARCH = 5000;
-    private static final int ROUNDS_PER_MATCH = 20;
+    private static final int POPULATION_SIZE = 100;
+    private static final int NUM_RUNS = 20;
+    private static final int NUM_GENERATIONS = 80;
+    private static final int GAMES_PER_MATCH = 100;
+    private static final int MEMORY_CAPACITY = 3;
 
-    private final Searcher searcher;
-    private final Writer writer;
-    private final PairingFactory pairingFactory;
-    private int stopConditionCounter;
+    private static Searcher searcher;
+    private static Writer writer;
+    private static PairingFactory pairingFactory;
 
     public static void main(String[] args) throws IOException {
+        searcher = new GeneticSearcher(new DecisionTreeStrategyFactory(MEMORY_CAPACITY));
+        pairingFactory = new AllPairingsFactory();
+        writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("ipd-out.txt"), StandardCharsets.UTF_8));
 
-        ConditionalCooperatorFactory strategyFactory = new ConditionalCooperatorFactory();
-        strategyFactory.setDepth(3);
-        strategyFactory.setBlockCount(3);
-
-        Main main = new Main(
-                new GeneticSearcher(strategyFactory),
-                new AllPairingsFactory(),
-                new BufferedWriter(new OutputStreamWriter(new FileOutputStream("ipd-out.txt"), StandardCharsets.UTF_8)));
-
-        while (true) {
-            main.runSearch();
+        for (int r = 0; r < NUM_RUNS; r++) {
+            doOneRun();
         }
     }
 
-    private Main(Searcher searcher, PairingFactory pairingFactory, Writer writer) {
-        this.searcher = searcher;
-        this.pairingFactory = pairingFactory;
-        this.writer = writer;
-    }
-
-    private void runSearch() throws IOException {
-
-        writer.write("\n*** NEW SEARCH ***\n\n");
+    private static void doOneRun() throws IOException {
+        writer.write("\n*** NEW RUN ***\n\n");
         List<Strategy> population = searcher.createInitialPopulation(POPULATION_SIZE);
-        stopConditionCounter = 0;
-
-        for(int i = TOURNAMENTS_PER_SEARCH; i > 0; i--) {
-
+        for (int i = 1; i <= NUM_GENERATIONS; i++) {
             Tournament tournament = new Tournament(pairingFactory);
-            Table result = tournament.runTournament(population, ROUNDS_PER_MATCH);
+            Table result = tournament.runTournament(population, GAMES_PER_MATCH);
+            writeResult(i, result);
             population = searcher.createNextPopulation(POPULATION_SIZE, result);
-
-            if ((i % 50 == 0) || (i == 1)) {
-                boolean stopCondition = updateStopConditionCounter(result);
-                writeResult(i, result, stopCondition);
-                if (stopConditionCounter == 5) {
-                    break;
-                }
-            }
         }
     }
 
-    private boolean updateStopConditionCounter(Table result) {
-        if ((double) result.getWinningStrategyCount() / POPULATION_SIZE > 0.95) {
-            stopConditionCounter += 1;
-            return true;
-        }
-        return false;
-    }
-
-    private void writeResult(int i, Table result, boolean stopCondition) throws IOException {
-        String prefix = " ";
-        if (stopCondition) {
-            prefix = ((stopConditionCounter == 5) || (i == 1)) ? "@" : String.format("%d", 5 - stopConditionCounter);
-        }
-        writer.write(prefix);
-        writeResult(i, result);
-    }
-
-    private void writeResult(int i, Table results) throws IOException {
+    private static void writeResult(int i, Table results) throws IOException {
+        writer.write((i == NUM_GENERATIONS) ? "@" : " ");
         List<Table.EntryBucket> buckets = results.getEntryBuckets();
-        writer.write(String.format("%6d; ", i));
+        writer.write(String.format("%4d; ", i));
         for (Table.EntryBucket b : buckets) {
-            writer.write(String.format("(%3d, %-35s, %5d); ",
-                    b.getCount(), b.getEntry().getStrategy(), b.getEntry().getPoints()));
+            writer.write(String.format("(%3d, %5d, %-20s); ",
+                    b.getCount(), b.getEntry().getPoints(), b.getEntry().getStrategy()));
         }
         writer.write("\n");
         writer.flush();

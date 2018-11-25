@@ -8,29 +8,26 @@ import java.util.*;
 
 public class ConditionalCooperatorFactory implements StrategyFactory {
 
-    private final Random random;
     private final StringGenerator g0, g1, g2;
+    private final Random random;
+    private final int depth;
+    private final int blockCount;
 
-    private int depth;
-    private int blockCount;
-
-    public ConditionalCooperatorFactory() {
-        this(new Random());
-    }
-
-    public ConditionalCooperatorFactory(Random random) {
-        this.random = random;
+    private ConditionalCooperatorFactory(Random random, int depth) {
         this.g0 = new StringGenerator("DCN?");
         this.g1 = new StringGenerator("DC?");
         this.g2 = new StringGenerator("DC");
-    }
-
-    public void setDepth(int depth) {
+        this.random = random;
         this.depth = depth;
+        this.blockCount = 5;
     }
 
-    public void setBlockCount(int blockCount) {
-        this.blockCount = blockCount;
+    public ConditionalCooperatorFactory(int depth) {
+        this(new Random(), depth);
+    }
+
+    public ConditionalCooperatorFactory(Random random) {
+        this(random, 3);
     }
 
     @Override
@@ -56,8 +53,6 @@ public class ConditionalCooperatorFactory implements StrategyFactory {
         }
         return new ConditionalCooperator(String.join("-", blocks));
     }
-
-
 
     @Override
     public <T extends Strategy> T recombine(T a, T b) {
