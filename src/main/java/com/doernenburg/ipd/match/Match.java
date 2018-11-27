@@ -13,26 +13,26 @@ public class Match {
 
     private static final SplittableRandom baseRandom = new SplittableRandom();
 
-    private final Player a;
-    private final Player b;
-    private final Score score;
     private final SplittableRandom random;
+    private final double mistakeProb;
+    private final int games;
+    private Score score;
 
-    public Match(Player a, Player b) {
-        this.a = a;
-        this.b = b;
-        this.score = new Score();
+    public Match(int games, double mistakeProb) {
         this.random = baseRandom.split();
+        this.games = games;
+        this.mistakeProb = mistakeProb;
     }
 
-    public Score playMatch(int games, double mistakeProb) {
+    public Score playMatch(Player a, Player b) {
+        this.score = new Score();
         for (int i = 0; i < games; i++) {
-            playGame(mistakeProb);
+            playGame(a, b);
         }
         return score;
     }
 
-    protected void playGame(double mistakeProb) {
+    private void playGame(Player a, Player b) {
         Move moveA = a.getMove();
         if (random.nextDouble() < mistakeProb) {
             moveA = (moveA == Move.COOPERATE) ? Move.DEFECT : Move.COOPERATE;

@@ -33,8 +33,8 @@ public class Tournament {
         Arrays.setAll(totalPoints, i -> new AtomicInteger(0));
 
         pairings.parallelStream().forEach(p -> {
-            Match match = new Match(strategies[p.aIdx].instantiate(), strategies[p.bIdx].instantiate());
-            Score score = match.playMatch(gamesPerMatch, mistakeProb);
+            Match match = new Match(gamesPerMatch, mistakeProb);
+            Score score = match.playMatch(strategies[p.aIdx].instantiate(), strategies[p.bIdx].instantiate());
             totalPoints[p.aIdx].addAndGet(score.a);
             totalPoints[p.bIdx].addAndGet(score.b);
         });
