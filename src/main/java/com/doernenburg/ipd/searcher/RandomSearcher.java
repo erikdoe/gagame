@@ -18,22 +18,19 @@ public class RandomSearcher extends Searcher {
     @Override
     public List<Strategy> createNextPopulation(int populationSize, Table result) {
         List<Strategy> population = new ArrayList<>();
+        copyBestStrategies(result, populationSize * (100 - REPLACEMENT_PERCENTAGE) / 100, population);
+        generateNewStrategies(result, populationSize * REPLACEMENT_PERCENTAGE / 100, population);
+        return population;
+    }
 
-        // copy everything but the worst strategies
-        for (Table.Entry e : result.getTopEntries(populationSize * (100 - REPLACEMENT_PERCENTAGE) /100)) {
-            population.add(e.getStrategy());
-        }
-
-        // fill with strategies based on the best (here: copy basics, create random encoded)
-        for (Table.Entry e : result.getTopEntries(populationSize * REPLACEMENT_PERCENTAGE/100)) {
+    private void generateNewStrategies(Table result, int count, List<Strategy> population) {
+        for (Table.Entry e : result.getTopEntries(count)) {
             if (e.getStrategy().getClass() == factory.getStrategyClass()) {
                 population.addAll(factory.getRandomStrategies(1));
             } else {
-                population.add(instantiateStrategy(e.getStrategy().getClass()));
+                population.add(e.getStrategy());
             }
         }
-
-        return population;
     }
 
 }

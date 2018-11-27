@@ -5,6 +5,7 @@ import com.doernenburg.ipd.strategies.StrategyFactory;
 import com.doernenburg.ipd.tournament.Table;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class GeneticSearcher extends Searcher {
 
@@ -21,35 +22,28 @@ public class GeneticSearcher extends Searcher {
     @Override
     public List<Strategy> createNextPopulation(int populationSize, Table result) {
         List<Strategy> population = new ArrayList<>();
-        List<Strategy> encoded = new ArrayList<>();
-
-        // copy everything but the worst strategies
-        for (Table.Entry e : result.getTopEntries(populationSize * (100 - REPLACEMENT_PERCENTAGE) / 100)) {
-            population.add(e.getStrategy());
-        }
-
-        // add some new random strategies
-        population.addAll(factory.getRandomStrategies(NUM_NEW_RANDOMS));
-
-        // collect all encoded strategies so far
-        for (Strategy s : population) {
-            if (s.getClass() == factory.getStrategyClass()) {
-                encoded.add(s);
-            }
-        }
-
-        // fill with strategies based on the best (here: copy basics, encoded get recombined with other top strategies)
-        for (Table.Entry e : result.getTopEntries(populationSize * REPLACEMENT_PERCENTAGE / 100 - NUM_NEW_RANDOMS)) {
-            if (e.getStrategy().getClass() == factory.getStrategyClass()) {
-                Strategy a = e.getStrategy();
-                Strategy b = encoded.get(random.nextInt(encoded.size()));
-                population.add(factory.recombine(a, b));
-            } else {
-                population.add(instantiateStrategy(e.getStrategy().getClass()));
-            }
-        }
-
+        copyBestStrategies(result, populationSize * (100 - REPLACEMENT_PERCENTAGE) / 100, population);
+        addNewRandomStrategies(NUM_NEW_RANDOMS, population);
+        generateNewStrategies(result, populationSize * REPLACEMENT_PERCENTAGE / 100 - NUM_NEW_RANDOMS, population);
         return population;
     }
+
+    private void generateNewStrategies(Table result, int count, List<Strategy> population) {
+        Class strategyClass = factory.getStrategyClass();
+        List<Strategy> encodedStrategies = population.stream()
+                .filter(s -> s.getClass() == strategyClass)
+                .collect(Collectors.toList());
+
+        for (Table.Entry e : result.getTopEntries(count)) {
+            if (e.getStrategy().getClass() == strategyClass) {
+                Strategy a = e.getStrategy();
+                Strategy b = encodedStrategies.get(random.nextInt(encodedStrategies.size()));
+                population.add(factory.recombine(a, b));
+            } else {
+                population.add(e.getStrategy());
+            }
+        }
+    }
+
 
 }

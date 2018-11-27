@@ -78,7 +78,13 @@ public class Table {
 
         @Override
         public int compareTo(Entry other) {
-            return (other.points - this.points);  // order descending
+            if (other.points != this.points) {
+                // order descending
+                return (other.points - this.points);
+            }
+            // keep strategies with same name/class together to make bucketing algorithm simpler
+            // introduces a bias in preference of strategies with "low" names
+            return other.getStrategy().toString().compareTo(this.strategy.toString());
         }
 
     }

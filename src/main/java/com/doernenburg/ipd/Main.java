@@ -17,9 +17,10 @@ public class Main {
 
     private static final int POPULATION_SIZE = 100;
     private static final int NUM_RUNS = 20;
-    private static final int NUM_GENERATIONS = 80;
+    private static final int NUM_GENERATIONS = 50;
     private static final int GAMES_PER_MATCH = 100;
     private static final int MEMORY_CAPACITY = 3;
+    private static final double MISTAKE_PROB = 0.001;
 
     private static Searcher searcher;
     private static Writer writer;
@@ -39,8 +40,8 @@ public class Main {
         writer.write("\n*** NEW RUN ***\n\n");
         List<Strategy> population = searcher.createInitialPopulation(POPULATION_SIZE);
         for (int i = 1; i <= NUM_GENERATIONS; i++) {
-            Tournament tournament = new Tournament(pairingFactory);
-            Table result = tournament.runTournament(population, GAMES_PER_MATCH);
+            Tournament tournament = new Tournament(pairingFactory, GAMES_PER_MATCH, MISTAKE_PROB);
+            Table result = tournament.runTournament(population);
             writeResult(i, result);
             population = searcher.createNextPopulation(POPULATION_SIZE, result);
         }
@@ -48,9 +49,8 @@ public class Main {
 
     private static void writeResult(int i, Table results) throws IOException {
         writer.write((i == NUM_GENERATIONS) ? "@" : " ");
-        List<Table.EntryBucket> buckets = results.getEntryBuckets();
         writer.write(String.format("%4d; ", i));
-        for (Table.EntryBucket b : buckets) {
+        for (Table.EntryBucket b : results.getEntryBuckets()) {
             writer.write(String.format("(%3d, %5d, %-20s); ",
                     b.getCount(), b.getEntry().getPoints(), b.getEntry().getStrategy()));
         }

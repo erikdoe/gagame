@@ -1,5 +1,6 @@
 target
 .idea/workspace.xml
 .idea/dictionaries
+.idea/inspectionProfiles
 ipd-out*.txt
 .DS_Store

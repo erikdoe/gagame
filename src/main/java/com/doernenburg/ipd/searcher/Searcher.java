@@ -16,12 +16,14 @@ public abstract class Searcher {
         this.factory = factory;
     }
 
-    public List<Strategy> createInitialPopulation(int populationSize) {
+    public List<Strategy> createInitialPopulation(int targetSize) {
         List<Strategy> population = new ArrayList<>();
         addBasicStrategies(population);
-        fillWithRandomStrategiesFromFactory(population, populationSize);
+        addNewRandomStrategies(targetSize - population.size(), population);
         return population;
     }
+
+    public abstract List<Strategy> createNextPopulation(int populationSize, Table result);
 
     protected void addBasicStrategies(List<Strategy> population) {
         population.add(new Cooperator());
@@ -31,22 +33,14 @@ public abstract class Searcher {
         population.add(new Detective());
     }
 
-    protected void fillWithRandomStrategiesFromFactory(List<Strategy> population, int size) {
-        int n = size - population.size();
-        population.addAll(factory.getRandomStrategies(n));
+    protected void addNewRandomStrategies(int numNewRandoms, List<Strategy> population) {
+        population.addAll(factory.getRandomStrategies(numNewRandoms));
     }
 
-
-    public abstract List<Strategy> createNextPopulation(int populationSize, Table result);
-
-
-    protected Strategy instantiateStrategy(Class c) {
-        try {
-            return (Strategy)c.newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
-            System.exit(1);
+    protected void copyBestStrategies(Table result, int count, List<Strategy> population) {
+        for (Table.Entry e : result.getTopEntries(count)) {
+            population.add(e.getStrategy());
         }
-        return null; // keep tools happy
     }
+
 }

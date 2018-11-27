@@ -19,10 +19,10 @@ public class TournamentTest {
     @Test
     public void shouldAddPointsForMatches() {
 
-        Tournament tournament = new Tournament(new AllPairingsFactory());
+        Tournament tournament = new Tournament(strategies -> Arrays.asList(new Pairing(0, 1)), 1, 0);
         List<Strategy> strategies = Arrays.asList(new Cooperator(), new Defector());
 
-        Table table = tournament.runTournament(strategies, 1);
+        Table table = tournament.runTournament(strategies);
         Iterator<Table.Entry> resultIterator = table.getAllEntries().iterator();
 
         Table.Entry result0 = resultIterator.next();
