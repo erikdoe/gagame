@@ -1,9 +1,9 @@
-A match pitting different strategies for the Prisoner's Dilemma[1] against each other. The plan is to search for the best strategy (for a given set of world parameters) using a genetic algorithm[2].
 
-For an excellent introduction to the Prisoner's Dilemma and its relevance see the interactive Evolution of Trust site[3].
+# Prisoner's dilemma 
 
-[1] http://en.wikipedia.org/wiki/Prisoner%27s_dilemma
+A match pitting different strategies for the [prisoner's dilemma](http://en.wikipedia.org/wiki/Prisoner%27s_dilemma) against each other. 
 
-[2] http://en.wikipedia.org/wiki/Genetic_algorithm 
+The code uses a [genetic algorithm](http://en.wikipedia.org/wiki/Genetic_algorithm) to evolve strategies that beat the universal TitForTat (a.k.a. Copycat) strategy, as long as a "mistake" probability is high enough. 1:1000 is normally sufficient.
 
-[3] http://ncase.me/trust/
+For an excellent introduction to the prisoner's dilemma and its relevance see the interactive [Evolution of Trust](http://ncase.me/trust/) site.
+
